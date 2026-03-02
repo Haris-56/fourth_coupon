@@ -8,7 +8,7 @@ export async function getSettings() {
     if (!settings) {
         // Create default settings if not exists
         return {
-            siteName: 'DiscountCouponn',
+            siteName: 'Couponz Factory',
             siteDescription: 'Best coupons and deals',
             facebookUrl: '#',
             twitterUrl: '#',

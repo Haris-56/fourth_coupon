@@ -6,6 +6,7 @@ import StoreModel from '@/models/Store';
 import { CouponCard } from '@/components/CouponCard';
 import { Search, Tag, Store } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -114,173 +115,182 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
     };
 
     return (
-        <div className="bg-slate-50 min-h-screen py-12">
-            <div className="container mx-auto px-4">
-                <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Sidebar */}
-                    <div className="w-full lg:w-64 flex-shrink-0 space-y-8">
-                        {/* Categories Filter */}
-                        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                            <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                                <Tag size={18} className="text-primary-500" />
-                                Categories
-                            </h3>
-                            <div className="space-y-2 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+        <div className="bg-secondary-50 min-h-screen pb-24 font-sans">
+            {/* Massive Hero-Style Search Header */}
+            <div className="bg-white border-b border-secondary-200 py-12 lg:py-16">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="text-center max-w-3xl mx-auto mb-10">
+                        <h1 className="text-4xl md:text-6xl font-black text-secondary-900 tracking-tighter leading-tight mb-4">
+                            {params.q ? (
+                                <>Results for <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600">"{params.q}"</span></>
+                            ) : params.category ? (
+                                <>{categories.find((c: any) => c.slug === params.category)?.name} <span className="text-primary-500">Deals</span></>
+                            ) : params.store ? (
+                                <>{stores.find((s: any) => s.slug === params.store)?.name} <span className="text-indigo-500">Promos</span></>
+                            ) : (
+                                <>Find the best <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600">Discounts</span></>
+                            )}
+                        </h1>
+                        <p className="text-secondary-500 text-lg font-medium">
+                            Showing {total} verified coupons and offers available today.
+                        </p>
+                    </div>
+
+                    {/* Horizontal Pill Filters */}
+                    <div className="space-y-6">
+                        {/* Type Filters */}
+                        <div className="flex flex-wrap items-center justify-center gap-3">
+                            {[
+                                { label: 'All Offers', value: '' },
+                                { label: 'Exclusive Deals', value: 'exclusive' },
+                                { label: 'Verified Codes', value: 'verified' },
+                                { label: 'Featured Promos', value: 'featured' }
+                            ].map((type) => {
+                                const isActive = params.type === type.value || (!params.type && type.value === '');
+                                return (
+                                    <Link
+                                        key={type.value}
+                                        href={buildUrl({ type: type.value, page: '1' })}
+                                        className={cn(
+                                            "px-6 py-3 rounded-full font-bold text-sm transition-all duration-300",
+                                            isActive
+                                                ? "bg-secondary-900 text-white shadow-lg shadow-secondary-900/20 scale-105"
+                                                : "bg-secondary-100 text-secondary-600 hover:bg-secondary-200 hover:text-secondary-900"
+                                        )}
+                                    >
+                                        {type.label}
+                                    </Link>
+                                );
+                            })}
+                        </div>
+
+                        {/* Scrolling Category Pills */}
+                        <div className="relative pt-6 border-t border-secondary-100">
+                            <div className="flex items-center gap-3 px-4 pb-4 overflow-x-auto hide-scrollbar snap-x">
+                                <span className="text-xs font-black text-secondary-400 uppercase tracking-widest shrink-0 mr-4">Categories</span>
                                 <Link
-                                    href="/search"
-                                    className={`block text-sm py-1.5 hover:text-primary-600 transition-colors ${!params.category ? 'text-primary-600 font-bold' : 'text-slate-600'}`}
+                                    href={buildUrl({ category: 'all', page: '1' })}
+                                    className={cn(
+                                        "shrink-0 px-5 py-2.5 rounded-2xl text-sm font-bold border transition-all snap-start",
+                                        !params.category ? "bg-primary-50 border-primary-200 text-primary-700" : "bg-white border-secondary-200 text-secondary-600 hover:border-primary-300"
+                                    )}
                                 >
-                                    All Categories
+                                    All
                                 </Link>
                                 {categories.map((cat: any) => (
                                     <Link
-                                        href={buildUrl({ category: cat.slug, page: '1' })}
                                         key={cat._id}
-                                        className={`flex items-center justify-between text-sm py-1.5 hover:text-primary-600 transition-colors ${params.category === cat.slug ? 'text-primary-600 font-bold' : 'text-slate-600'}`}
+                                        href={buildUrl({ category: cat.slug, page: '1' })}
+                                        className={cn(
+                                            "shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-bold border transition-all snap-start",
+                                            params.category === cat.slug ? "bg-primary-50 border-primary-200 text-primary-700" : "bg-white border-secondary-200 text-secondary-600 hover:border-primary-300"
+                                        )}
                                     >
-                                        <span>{cat.name}</span>
-                                        <span className="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-full font-bold group-hover:bg-primary-50">
-                                            {cat.count}
-                                        </span>
+                                        {cat.name}
+                                        <span className={cn(
+                                            "text-[10px] px-2 py-0.5 rounded-full",
+                                            params.category === cat.slug ? "bg-primary-200/50 text-primary-800" : "bg-secondary-100 text-secondary-500"
+                                        )}>{cat.count}</span>
                                     </Link>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Stores Filter */}
-                        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                            <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                                <Store size={18} className="text-primary-500" />
-                                Popular Stores
-                            </h3>
-                            <div className="space-y-2">
+                        {/* Scrolling Store Pills */}
+                        <div className="relative pt-2">
+                            <div className="flex items-center gap-3 px-4 pb-4 overflow-x-auto hide-scrollbar snap-x">
+                                <span className="text-xs font-black text-secondary-400 uppercase tracking-widest shrink-0 mr-4">Top Brands</span>
                                 <Link
-                                    href={buildUrl({ store: '', page: '1' })}
-                                    className="flex items-center justify-between group cursor-pointer"
+                                    href={buildUrl({ store: 'all', page: '1' })}
+                                    className={cn(
+                                        "shrink-0 px-5 py-2.5 rounded-2xl text-sm font-bold border transition-all snap-start",
+                                        !params.store ? "bg-indigo-50 border-indigo-200 text-indigo-700" : "bg-white border-secondary-200 text-secondary-600 hover:border-indigo-300"
+                                    )}
                                 >
-                                    <div className="flex items-center gap-2">
-                                        <div className={`w-4 h-4 border rounded flex items-center justify-center transition-colors ${!params.store ? 'bg-primary-600 border-primary-600' : 'border-slate-300 group-hover:border-primary-500'}`}>
-                                            {!params.store && <span className="text-white text-[10px]">✓</span>}
-                                        </div>
-                                        <span className={`text-sm ${!params.store ? 'text-primary-600 font-medium' : 'text-slate-600 group-hover:text-primary-500'}`}>All Stores</span>
-                                    </div>
+                                    All
                                 </Link>
                                 {stores.map((store: any) => (
                                     <Link
-                                        href={buildUrl({ store: store.slug, page: '1' })}
                                         key={store._id}
-                                        className="flex items-center justify-between group cursor-pointer"
+                                        href={buildUrl({ store: store.slug, page: '1' })}
+                                        className={cn(
+                                            "shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-bold border transition-all snap-start",
+                                            params.store === store.slug ? "bg-indigo-50 border-indigo-200 text-indigo-700" : "bg-white border-secondary-200 text-secondary-600 hover:border-indigo-300"
+                                        )}
                                     >
-                                        <div className="flex items-center gap-2">
-                                            <div className={`w-4 h-4 border rounded flex items-center justify-center transition-colors ${params.store === store.slug ? 'bg-primary-600 border-primary-600' : 'border-slate-300 group-hover:border-primary-500'}`}>
-                                                {params.store === store.slug && <span className="text-white text-[10px]">✓</span>}
-                                            </div>
-                                            <span className={`text-sm ${params.store === store.slug ? 'text-primary-600 font-medium' : 'text-slate-600 group-hover:text-primary-500'}`}>{store.name}</span>
-                                        </div>
-                                        <span className="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-full font-bold group-hover:bg-primary-50">
-                                            {store.count}
-                                        </span>
+                                        {store.name}
                                     </Link>
                                 ))}
                             </div>
                         </div>
-
-                        {/* Type Filter */}
-                        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                            <h3 className="font-bold text-slate-800 mb-4">Filters</h3>
-                            <div className="space-y-2">
-                                {[
-                                    { label: 'All Offers', value: '' },
-                                    { label: 'Exclusive', value: 'exclusive' },
-                                    { label: 'Verified', value: 'verified' },
-                                    { label: 'Featured', value: 'featured' }
-                                ].map((type) => (
-                                    <Link
-                                        href={buildUrl({ type: type.value, page: '1' })}
-                                        key={type.value}
-                                        className="flex items-center gap-2 group cursor-pointer"
-                                    >
-                                        <div className={`w-4 h-4 border rounded flex items-center justify-center transition-colors ${params.type === type.value || (!params.type && type.value === '') ? 'bg-primary-600 border-primary-600' : 'border-slate-300 group-hover:border-primary-500'}`}>
-                                            {(params.type === type.value || (!params.type && type.value === '')) && <span className="text-white text-[10px]">✓</span>}
-                                        </div>
-                                        <span className={`text-sm ${params.type === type.value || (!params.type && type.value === '') ? 'text-primary-600 font-medium' : 'text-slate-600 group-hover:text-primary-500'}`}>{type.label}</span>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Main Content */}
-                    <div className="flex-1">
-                        <div className="flex items-center justify-between mb-6">
-                            <h1 className="text-xl font-bold text-slate-800">
-                                {params.q ? `Results for "${params.q}"` :
-                                    params.category ? `${categories.find((c: any) => c.slug === params.category)?.name} Coupons` :
-                                        params.store ? `${stores.find((s: any) => s.slug === params.store)?.name} Coupons` :
-                                            'All Active Coupons'}
-                            </h1>
-                            <span className="text-sm text-slate-500">{total} Results Found</span>
-                        </div>
-
-                        <div className="space-y-6">
-                            {coupons.map((coupon: any) => (
-                                <CouponCard key={coupon._id} coupon={coupon} layout="horizontal" />
-                            ))}
-                            {coupons.length === 0 && (
-                                <div className="bg-white p-12 rounded-xl text-center border border-slate-100 shadow-sm">
-                                    <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <Search className="text-slate-300" size={32} />
-                                    </div>
-                                    <p className="text-slate-500 text-lg font-medium">No coupons found matching your criteria.</p>
-                                    <p className="text-slate-400 text-sm mt-1 mb-6">Try adjusting your filters or searching for something else.</p>
-                                    <Link href="/" className="bg-primary-600 text-white px-6 py-2 rounded-full font-bold hover:bg-primary-700 transition-all shadow-lg shadow-primary-200">
-                                        Go back home
-                                    </Link>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Pagination */}
-                        {totalPages > 1 && (
-                            <div className="flex justify-center mt-12 gap-2">
-                                {page > 1 && (
-                                    <Link
-                                        href={buildUrl({ page: (page - 1).toString() })}
-                                        className="w-10 h-10 rounded-full bg-white text-slate-600 flex items-center justify-center hover:bg-slate-50 border border-slate-200 transition-colors"
-                                    >
-                                        &larr;
-                                    </Link>
-                                )}
-
-                                {[...Array(totalPages)].map((_, i) => {
-                                    const p = i + 1;
-                                    if (totalPages > 7 && Math.abs(p - page) > 2 && p !== 1 && p !== totalPages) {
-                                        if (p === 2 || p === totalPages - 1) return <span key={p} className="flex items-center px-1 text-slate-400">...</span>;
-                                        return null;
-                                    }
-                                    return (
-                                        <Link
-                                            key={p}
-                                            href={buildUrl({ page: p.toString() })}
-                                            className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${page === p ? 'bg-primary-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'}`}
-                                        >
-                                            {p}
-                                        </Link>
-                                    );
-                                })}
-
-                                {page < totalPages && (
-                                    <Link
-                                        href={buildUrl({ page: (page + 1).toString() })}
-                                        className="w-10 h-10 rounded-full bg-white text-slate-600 flex items-center justify-center hover:bg-slate-50 border border-slate-200 transition-colors"
-                                    >
-                                        &rarr;
-                                    </Link>
-                                )}
-                            </div>
-                        )}
                     </div>
                 </div>
+            </div>
+
+            {/* Results Grid - Changed to vertical layout */}
+            <div className="container mx-auto px-4 max-w-7xl pt-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {coupons.map((coupon: any) => (
+                        <div key={coupon._id} className="h-full">
+                            <CouponCard coupon={coupon} />
+                        </div>
+                    ))}
+                    {coupons.length === 0 && (
+                        <div className="col-span-full bg-white p-16 rounded-[3rem] text-center border-2 border-dashed border-secondary-200">
+                            <div className="text-6xl mb-6">🕵️‍♂️</div>
+                            <h2 className="text-3xl font-black text-secondary-900 mb-4 tracking-tight">No deals found!</h2>
+                            <p className="text-secondary-500 font-medium text-lg mb-8 max-w-md mx-auto">We couldn't find any active offers matching your current filters. Try exploring other categories.</p>
+                            <Link href="/" className="inline-flex items-center justify-center bg-secondary-900 hover:bg-primary-600 text-white px-10 py-4 rounded-full font-bold transition-all shadow-xl active:scale-95">
+                                Clear All Filters
+                            </Link>
+                        </div>
+                    )}
+                </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                    <div className="flex justify-center mt-20 gap-3">
+                        {page > 1 && (
+                            <Link
+                                href={buildUrl({ page: (page - 1).toString() })}
+                                className="w-14 h-14 rounded-full bg-white text-secondary-900 flex items-center justify-center hover:bg-primary-50 hover:text-primary-600 border-2 border-secondary-200 hover:border-primary-200 transition-all font-black text-xl shadow-sm"
+                            >
+                                &larr;
+                            </Link>
+                        )}
+
+                        {[...Array(totalPages)].map((_, i) => {
+                            const p = i + 1;
+                            if (totalPages > 7 && Math.abs(p - page) > 2 && p !== 1 && p !== totalPages) {
+                                if (p === 2 || p === totalPages - 1) return <span key={p} className="flex items-center px-4 text-secondary-300 font-black text-xl tracking-widest">...</span>;
+                                return null;
+                            }
+                            return (
+                                <Link
+                                    key={p}
+                                    href={buildUrl({ page: p.toString() })}
+                                    className={cn(
+                                        "w-14 h-14 rounded-full flex items-center justify-center font-black text-lg transition-all duration-300",
+                                        page === p
+                                            ? 'bg-secondary-900 text-white shadow-xl shadow-secondary-900/20 scale-110'
+                                            : 'bg-white text-secondary-500 hover:bg-secondary-100 border-2 border-secondary-200 hover:border-secondary-300 shadow-sm'
+                                    )}
+                                >
+                                    {p}
+                                </Link>
+                            );
+                        })}
+
+                        {page < totalPages && (
+                            <Link
+                                href={buildUrl({ page: (page + 1).toString() })}
+                                className="w-14 h-14 rounded-full bg-white text-secondary-900 flex items-center justify-center hover:bg-primary-50 hover:text-primary-600 border-2 border-secondary-200 hover:border-primary-200 transition-all font-black text-xl shadow-sm"
+                            >
+                                &rarr;
+                            </Link>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

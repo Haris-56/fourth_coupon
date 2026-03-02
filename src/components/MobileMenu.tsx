@@ -69,7 +69,7 @@ export function MobileMenu({ isAuth, role }: MobileMenuProps) {
 
                     {/* Logo */}
                     <Link href="/" onClick={() => setIsOpen(false)} className="mb-6 mt-4">
-                        <img src="/discountcoupon-mobile.png" alt="DiscountCouponn" className="h-14 w-auto" />
+                        <img src="/logo.png" alt="Couponz Factory" className="h-14 w-auto" />
                     </Link>
                 </div>
 

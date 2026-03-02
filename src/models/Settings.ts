@@ -37,7 +37,7 @@ export interface ISettings extends Document {
 
 const SettingsSchema: Schema = new Schema(
     {
-        siteName: { type: String, default: 'DiscountCouponn' },
+        siteName: { type: String, default: 'Couponz Factory' },
         siteDescription: { type: String, default: 'Best coupons and deals' },
         supportEmail: { type: String, default: 'admin@example.com' },
         maintenanceMode: { type: Boolean, default: false },

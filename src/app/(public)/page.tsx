@@ -34,139 +34,145 @@ export default async function HomePage() {
     return (
         <div className="space-y-16 pb-16">
             {/* Hero Section */}
-            <section className="relative bg-secondary-900 overflow-hidden py-24 lg:py-32">
-                <div className="absolute inset-0 overflow-hidden">
-                    {/* Modern Abstract Shapes */}
-                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary-600/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3"></div>
+            <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-40 overflow-hidden bg-white">
+                {/* Background decorative elements */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 overflow-hidden pointer-events-none">
+                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-100/40 rounded-full blur-[120px] animate-pulse"></div>
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-100/40 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,rgba(255,255,255,0.8)_100%)]"></div>
                 </div>
 
                 <div className="container mx-auto px-4 relative z-10 text-center">
-                    <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 tracking-tight drop-shadow-sm leading-tight">
-                        Maximum Savings with <br /><span className="text-primary-500 underline decoration-primary-500/30 underline-offset-8">Verified Coupons</span>
-                    </h1>
-                    <p className="text-lg md:text-xl text-secondary-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                        Join millions of shoppers who save every day with our hand-picked, exclusive deals from your favorite global brands.
-                    </p>
+                    <div className="max-w-4xl mx-auto space-y-12">
+                        <div className="space-y-6">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-50 border border-secondary-100 shadow-sm animate-bounce-subtle">
+                                <span className="flex h-2 w-2 rounded-full bg-primary-500 animate-ping"></span>
+                                <span className="text-secondary-600 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase">Verified Deals Added Hourly</span>
+                            </div>
 
-                    <SearchForm />
+                            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-secondary-900 tracking-tighter leading-[0.85] filter drop-shadow-sm">
+                                Unlock the<br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-indigo-600 to-primary-600 bg-[length:200%_auto] animate-gradient pb-2 inline-block">Secret Savings.</span>
+                            </h1>
 
-                    <div className="mt-8 flex items-center justify-center gap-6 text-secondary-400 text-sm font-medium">
-                        <div className="flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            1,200+ New Deals Today
+                            <p className="text-xl md:text-2xl text-secondary-600 font-medium max-w-2xl mx-auto leading-relaxed">
+                                Don't checkout without us. Find the best promo codes for thousands of stores globally.
+                            </p>
                         </div>
-                        <div className="hidden sm:block text-secondary-700">|</div>
-                        <div className="flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                            Verified & Tested
+
+                        <div className="max-w-3xl mx-auto">
+                            <SearchForm />
+                        </div>
+
+                        <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
+                            <span className="text-xs font-black text-secondary-400 uppercase tracking-[0.3em] mr-2">Trending</span>
+                            {categories.slice(0, 5).map((category: any) => (
+                                <Link
+                                    key={category._id}
+                                    href={`/search?category=${category.slug}`}
+                                    className="bg-white hover:bg-primary-50 text-secondary-800 hover:text-primary-700 px-6 py-2.5 rounded-full text-sm font-bold transition-all border border-secondary-200 hover:border-primary-400 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] hover:shadow-lg hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    {category.name}
+                                </Link>
+                            ))}
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Exclusive Coupons */}
+            {/* Exclusive Coupons - Horizontal Scroll Layout */}
             {exclusiveCoupons.length > 0 && (
-                <section className="container mx-auto px-4">
-                    {/* Section Header */}
-                    <div className="flex items-center justify-between mb-8 relative">
-                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[1px] bg-secondary-200 -z-10"></div>
-                        <h2 className="text-xl font-bold text-white bg-primary-600 px-6 py-2 transform -skew-x-12 inline-block shadow-md">
-                            <span className="block transform skew-x-12">Exclusive Coupons</span>
-                        </h2>
-                        <Link href="/search?filter=exclusive" className="text-secondary-500 hover:text-primary-600 bg-white px-4 py-1 text-sm font-medium border border-secondary-200 rounded-full transition-colors">View All &gt;</Link>
+                <section className="py-24 bg-secondary-900 border-y border-secondary-800">
+                    <div className="container mx-auto px-4 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                        <div className="text-left">
+                            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4">
+                                Exclusive <span className="text-primary-400">Drops.</span>
+                            </h2>
+                            <p className="text-secondary-400 font-medium text-xl max-w-lg">
+                                VIP access to deals you won't find anywhere else on the web.
+                            </p>
+                        </div>
+                        <Link href="/search?filter=exclusive" className="group flex items-center gap-3 text-white bg-white/10 hover:bg-white/20 px-6 py-3 font-bold rounded-full transition-all w-fit">
+                            See All Exclusives <ChevronRight size={18} className="group-hover:translate-x-1" />
+                        </Link>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex overflow-x-auto pb-12 pt-4 snap-x snap-mandatory hide-scrollbar pl-4 md:pl-[calc((100vw-1536px)/2+2rem)] xl:pl-[calc((100vw-1280px)/2+1rem)] 2xl:pl-[calc((100vw-1536px)/2+1rem)] gap-8" style={{ paddingLeft: 'max(1rem, calc((100vw - 1200px) / 2))' }}>
                         {exclusiveCoupons.map((coupon: any) => (
-                            <CouponCard key={coupon._id} coupon={coupon} layout="horizontal" />
-                        ))}
-                    </div>
-                </section>
-            )}
-
-            {/* Featured Coupons */}
-            {featuredCoupons.length > 0 && (
-                <section className="container mx-auto px-4">
-                    <div className="flex items-center justify-between mb-8 relative">
-                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[1px] bg-secondary-200 -z-10"></div>
-                        <h2 className="text-xl font-bold text-secondary-900 bg-primary-100 px-6 py-2 transform -skew-x-12 inline-block shadow-sm border border-primary-200">
-                            <span className="block transform skew-x-12">Featured Coupons</span>
-                        </h2>
-                        <Link href="/search?filter=featured" className="text-secondary-500 hover:text-primary-600 bg-white px-4 py-1 text-sm font-medium border border-secondary-200 rounded-full transition-colors">View All &gt;</Link>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {featuredCoupons.map((coupon: any) => (
-                            <CouponCard key={coupon._id} coupon={coupon} />
-                        ))}
-                    </div>
-                </section>
-            )}
-
-            {/* Featured Categories (Icon Grid) */}
-            {categories.length > 0 && (
-                <section className="container mx-auto px-4">
-                    <div className="flex items-center justify-between mb-8">
-                        <h2 className="text-2xl font-bold text-secondary-800">Featured Categories</h2>
-                        <Link href="/categories" className="text-primary-600 hover:text-primary-700 font-medium text-sm">View All &gt;</Link>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-                        {categories.map((category: any) => (
-                            <Link
-                                href={`/search?category=${category.slug}`}
-                                key={category._id}
-                                className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all group border border-transparent hover:border-primary-100"
-                            >
-                                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">
-                                    {category.imageUrl && !category.imageUrl.startsWith('http') ? (
-                                        <i className={`text-secondary-700 group-hover:text-primary-600 ${category.imageUrl}`}></i>
-                                    ) : category.imageUrl ? (
-                                        <img src={category.imageUrl} alt={category.name} className="w-10 h-10 object-contain" />
-                                    ) : (
-                                        <span className="text-3xl">✈️</span>
-                                    )}
-                                </div>
-                                <span className="font-bold text-secondary-700 group-hover:text-primary-600 text-center text-sm">{category.name}</span>
-                            </Link>
-                        ))}
-                    </div>
-                </section>
-            )}
-
-            {/* Featured Stores */}
-            {popularStores.length > 0 && (
-                <section className="bg-slate-50 py-20 border-y border-slate-200/60">
-                    <div className="container mx-auto px-4">
-                        <div className="flex items-center justify-between mb-12">
-                            <div>
-                                <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Featured Brands</h2>
-                                <p className="text-slate-500 mt-2">Shop and save with top-rated global retailers</p>
+                            <div key={coupon._id} className="snap-start shrink-0 w-[90vw] md:w-[700px]">
+                                <CouponCard coupon={coupon} layout="horizontal" />
                             </div>
-                            <Link href="/stores" className="inline-flex items-center gap-2 bg-white border border-slate-200 text-slate-600 px-5 py-2 rounded-full font-bold text-sm hover:bg-slate-50 transition-all hover:shadow-sm">
-                                Explore All Stores <ChevronRight size={16} />
-                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            {/* Featured Deals - Masonry Layout */}
+            {featuredCoupons.length > 0 && (
+                <section className="container mx-auto px-4 py-24">
+                    <div className="mb-16 max-w-2xl">
+                        <h2 className="text-5xl font-black text-secondary-900 tracking-tighter mb-4">
+                            Handpicked <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-indigo-500">For You.</span>
+                        </h2>
+                        <p className="text-xl text-secondary-500 font-medium">
+                            The most popular, verified discounts trending right now.
+                        </p>
+                    </div>
+
+                    <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+                        {featuredCoupons.map((coupon: any) => (
+                            <div key={coupon._id} className="break-inside-avoid">
+                                <CouponCard coupon={coupon} />
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-12 text-center">
+                        <Link href="/search?filter=featured" className="inline-block bg-white text-secondary-900 border-[3px] border-secondary-900 hover:bg-secondary-900 hover:text-white px-10 py-4 font-black uppercase tracking-widest text-sm transition-colors rounded-xl">
+                            Load More Deals
+                        </Link>
+                    </div>
+                </section>
+            )}
+
+            {/* Featured Stores - Pill Layout Structure */}
+            {popularStores.length > 0 && (
+                <section className="bg-secondary-50 py-24 border-t border-secondary-200">
+                    <div className="container mx-auto px-4">
+                        <div className="text-center mb-16 max-w-3xl mx-auto">
+                            <h2 className="text-4xl md:text-5xl font-black text-secondary-900 tracking-tight leading-tight mb-6">
+                                Top Destinations.
+                            </h2>
+                            <p className="text-secondary-500 text-xl font-medium">
+                                We partner with thousands of brands to bring you savings wherever you shop.
+                            </p>
                         </div>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                        <div className="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto mb-16 cursor-default">
                             {popularStores.map((store: any) => (
                                 <Link
                                     href={`/store/${store.slug}`}
                                     key={store._id}
-                                    className="group bg-white border border-slate-100 p-6 rounded-2xl flex flex-col items-center justify-center transition-all hover:shadow-xl hover:-translate-y-1 hover:border-primary-100"
+                                    className="group flex items-center gap-4 bg-white border border-secondary-200 hover:border-primary-400 rounded-full pr-8 pl-2 py-2 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1"
                                 >
-                                    <div className="w-20 h-20 bg-white rounded-xl shadow-sm border border-slate-50 flex items-center justify-center overflow-hidden mb-4 p-2 group-hover:shadow-md transition-shadow">
+                                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-secondary-100 p-2 group-hover:scale-105 transition-transform">
                                         {store.logoUrl ? (
-                                            <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain" />
+                                            <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain filter group-hover:brightness-110" />
                                         ) : (
-                                            <span className="text-2xl font-bold text-slate-200">{store.name.substring(0, 1)}</span>
+                                            <span className="font-black text-secondary-400 text-lg mix-blend-multiply">{store.name.substring(0, 1)}</span>
                                         )}
                                     </div>
-                                    <span className="text-sm font-bold text-slate-700 group-hover:text-primary-600 transition-colors text-center truncate w-full">
+                                    <span className="font-black text-secondary-800 text-lg group-hover:text-primary-600 transition-colors">
                                         {store.name}
                                     </span>
                                 </Link>
                             ))}
+                        </div>
+
+                        <div className="text-center">
+                            <Link href="/stores" className="inline-flex items-center gap-2 text-primary-600 font-bold hover:text-primary-800 transition-colors">
+                                View A-Z Store Directory <ChevronRight size={20} />
+                            </Link>
                         </div>
                     </div>
                 </section>

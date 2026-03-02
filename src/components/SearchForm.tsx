@@ -35,17 +35,18 @@ export default function SearchForm({ compact = false }: { compact?: boolean }) {
 
     return (
         <form onSubmit={handleSearch} className="max-w-2xl mx-auto relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-            <div className="relative flex items-center bg-white rounded-full shadow-xl">
-                <SearchIcon className="ml-6 text-secondary-400" />
+            <div className="relative flex items-center bg-white rounded-full shadow-2xl shadow-primary-900/5 ring-1 ring-secondary-200/50 p-2 focus-within:ring-2 focus-within:ring-primary-400 focus-within:shadow-primary-500/10 transition-all">
+                <div className="flex items-center justify-center w-12 h-12 bg-secondary-50 rounded-full ml-1 shrink-0">
+                    <SearchIcon className="text-primary-500 w-5 h-5" />
+                </div>
                 <input
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search for stores like 'Nike', 'Amazon'..."
-                    className="w-full py-4 px-4 rounded-full focus:outline-none text-secondary-700 placeholder:text-secondary-400 font-medium"
+                    className="w-full py-4 px-4 bg-transparent focus:outline-none text-secondary-800 text-base placeholder:text-secondary-400 font-bold"
                 />
-                <button type="submit" className="mr-2 my-2 bg-primary-600 text-white px-8 py-2 rounded-full font-bold hover:bg-primary-700 transition-colors shadow-lg shadow-primary-600/30">
+                <button type="submit" className="shrink-0 bg-gradient-to-r from-primary-600 to-indigo-600 text-white px-8 py-4 rounded-full font-bold text-sm tracking-wide hover:from-primary-700 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg hover:shadow-primary-600/20 active:scale-95">
                     Search Offers
                 </button>
             </div>

@@ -69,18 +69,20 @@ export default async function StorePage(props: {
             <div className="container mx-auto px-4">
                 <div className="flex flex-col lg:flex-row gap-8 items-start">
                     {/* Left Sidebar */}
-                    <div className="lg:w-1/4 w-full flex-shrink-0 lg:sticky lg:top-24">
-                        <div className="bg-white rounded-xl shadow-sm border border-secondary-200 p-8 flex flex-col items-center text-center space-y-6 overflow-hidden">
-                            <div className="w-48 h-48 rounded-2xl bg-white shadow-lg border border-secondary-100 flex items-center justify-center text-5xl font-bold text-secondary-300 overflow-hidden mb-2 p-4">
+                    <div className="lg:w-[320px] w-full flex-shrink-0 lg:sticky lg:top-24">
+                        <div className="bg-white rounded-3xl shadow-xl shadow-primary-900/5 border border-secondary-100 p-8 flex flex-col items-center text-center space-y-6 overflow-hidden relative">
+                            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-primary-50 to-white"></div>
+
+                            <div className="w-40 h-40 rounded-3xl bg-white shadow-xl shadow-primary-500/10 border border-primary-100 flex items-center justify-center text-5xl font-bold text-secondary-300 overflow-hidden mb-2 p-5 relative z-10 group">
                                 {store.logoUrl ? (
                                     <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain" />
                                 ) : (
-                                    <span className="break-all">{store.name.substring(0, 1)}</span>
+                                    <span className="break-all mix-blend-multiply text-primary-300">{store.name.substring(0, 1)}</span>
                                 )}
                             </div>
 
-                            <div className="w-full">
-                                <h1 className="text-2xl font-extrabold text-secondary-900 break-words line-clamp-2">{store.name}</h1>
+                            <div className="w-full relative z-10">
+                                <h1 className="text-3xl font-black text-secondary-900 break-words line-clamp-2">{store.name}</h1>
 
                                 {/* Static Rating for Aesthetics */}
                                 <div className="flex items-center justify-center gap-1 mt-3 text-amber-400">
@@ -90,21 +92,21 @@ export default async function StorePage(props: {
                                         </svg>
                                     ))}
                                 </div>
-                                <p className="text-xs font-bold text-secondary-400 mt-1 uppercase tracking-tighter">4.8 out of 5 stars</p>
+                                <p className="text-[11px] font-bold text-secondary-400 mt-1.5 uppercase tracking-widest">4.8 out of 5 stars</p>
                             </div>
 
-                            <p className="text-secondary-600 text-sm leading-relaxed border-t border-secondary-50 pt-4 break-words">{store.description}</p>
+                            <p className="text-secondary-600 text-sm leading-relaxed border-t border-secondary-100/50 pt-6 break-words relative z-10 font-medium">{store.description}</p>
                         </div>
                     </div>
 
                     {/* Right Content */}
                     <div className="flex-1 w-full min-w-0">
                         {/* Store Header with Search */}
-                        <div className="bg-white rounded-xl shadow-sm border border-secondary-200 p-6 mb-8 flex flex-col gap-6 overflow-hidden">
+                        <div className="bg-white rounded-3xl shadow-xl shadow-primary-900/5 border border-secondary-100 p-8 mb-8 flex flex-col gap-6 overflow-hidden">
                             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                                 <div className="min-w-0 flex-1">
-                                    <h2 className="text-2xl font-extrabold text-secondary-900 break-words">{store.name} Coupon Codes</h2>
-                                    <div className="h-1.5 w-16 bg-primary-500 rounded-full mt-2"></div>
+                                    <h2 className="text-3xl font-black text-secondary-900 break-words tracking-tight">{store.name} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600">Promo Codes</span></h2>
+                                    <div className="h-1.5 w-20 bg-gradient-to-r from-primary-500 to-indigo-500 rounded-full mt-3"></div>
                                 </div>
                                 <div className="flex gap-3 shrink-0">
                                     {store.affiliateLink && (
@@ -112,7 +114,7 @@ export default async function StorePage(props: {
                                             href={store.affiliateLink}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-full font-bold text-sm uppercase tracking-wider transition-all shadow-lg shadow-primary-200 active:scale-95"
+                                            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-700 hover:to-indigo-700 text-white px-8 py-3 rounded-xl font-bold text-sm tracking-wide transition-all shadow-md shadow-primary-500/20 hover:shadow-lg hover:-translate-y-0.5"
                                         >
                                             Visit Store <ExternalLink size={16} />
                                         </a>
@@ -122,17 +124,17 @@ export default async function StorePage(props: {
 
                             {/* Local Search Input */}
                             <div className="pt-2">
-                                <form className="relative max-w-md">
+                                <form className="relative max-w-xl">
                                     <input
                                         type="text"
                                         name="q"
                                         defaultValue={q}
-                                        placeholder={`Search ${store.name} coupons...`}
-                                        className="w-full pl-4 pr-10 py-2.5 bg-secondary-50 border border-secondary-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
+                                        placeholder={`Search ${store.name} offers...`}
+                                        className="w-full pl-5 pr-12 py-3.5 bg-secondary-50 border border-secondary-200 rounded-xl text-sm font-bold text-secondary-800 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all shadow-inner"
                                     />
-                                    <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-400 hover:text-primary-600">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 text-primary-500 hover:text-primary-600 transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 stroke-current" fill="none" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                         </svg>
                                     </button>
                                 </form>
@@ -140,14 +142,14 @@ export default async function StorePage(props: {
                         </div>
 
                         {coupons.length > 0 ? (
-                            <div className="grid grid-cols-1 gap-4">
+                            <div className="grid grid-cols-1 gap-6">
                                 {coupons.map((coupon: any) => (
                                     <CouponCard key={coupon._id} coupon={coupon} layout="horizontal" />
                                 ))}
                             </div>
                         ) : (
-                            <div className="text-center py-20 bg-white rounded-xl border border-dashed border-secondary-300 px-6">
-                                <p className="text-secondary-500 mb-2 font-medium">No coupons found matching your search.</p>
+                            <div className="text-center py-24 bg-white rounded-3xl border border-secondary-100 shadow-sm px-6">
+                                <p className="text-secondary-600 mb-4 font-bold text-lg">No offers found matching your search.</p>
                                 <Link href={`/store/${store.slug}`} className="text-primary-600 font-bold hover:underline">Clear search and view all offers</Link>
                             </div>
                         )}
