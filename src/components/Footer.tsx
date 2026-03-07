@@ -12,7 +12,7 @@ export async function Footer() {
                 {/* Brand */}
                 <div className="space-y-6">
                     <Link href="/">
-                        <img src="/logo.png" alt="Couponz Factory" className="h-12 w-auto" />
+                        <img src="/logo.png" alt="Discountz Factory" className="h-12 w-auto" />
                     </Link>
                     <p className="text-sm text-secondary-500 leading-relaxed max-w-xs">
                         {settings.siteDescription}
@@ -50,7 +50,7 @@ export async function Footer() {
                         {settings.linkedinUrl && <a href={settings.linkedinUrl} target="_blank" rel="noopener noreferrer" className="bg-secondary-100 hover:bg-primary-600 hover:text-white p-2.5 rounded-full transition-all duration-300 text-secondary-600"><Linkedin size={18} /></a>}
                     </div>
                     <p className="mt-8 text-sm text-secondary-400 font-medium">
-                        &copy; {new Date().getFullYear()} Couponz Factory. <br />All rights reserved.
+                        &copy; {new Date().getFullYear()} Discountz Factory. <br />All rights reserved.
                     </p>
                 </div>
             </div>

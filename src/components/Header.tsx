@@ -13,7 +13,7 @@ export async function Header() {
             <div className="container mx-auto px-4 h-20 flex items-center justify-between gap-6">
                 {/* Logo */}
                 <Link href="/" className="flex items-center group">
-                    <img src="/logo.png" alt="Couponz Factory" className="h-10 md:h-12 w-auto group-hover:scale-105 transition-transform duration-300" />
+                    <img src="/logo.png" alt="Discountz Factory" className="h-10 md:h-12 w-auto group-hover:scale-105 transition-transform duration-300" />
                 </Link>
 
                 {/* Search Bar - Hidden on mobile, visible on md+ */}

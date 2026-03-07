@@ -85,7 +85,7 @@ export default async function CategoriesPage(props: { searchParams: Promise<any>
                                     <td className="px-6 py-4 font-mono text-xs text-secondary-500">{cat.slug}</td>
                                     <td className="px-6 py-4 text-right">
                                         <AdminActionMenu
-                                            editUrl={`/admin/categories/${cat._id}/edit`}
+                                            editUrl={`/admin/categories/edit/${cat._id}`}
                                             onDelete={async () => {
                                                 'use server';
                                                 return await deleteCategory(cat._id);
