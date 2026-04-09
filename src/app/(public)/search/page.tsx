@@ -115,20 +115,22 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
     };
 
     return (
-        <div className="bg-secondary-50 min-h-screen pb-24 font-sans">
+        <div className="bg-[#fafafa] min-h-screen pb-24 font-sans">
             {/* Massive Hero-Style Search Header */}
-            <div className="bg-white border-b border-secondary-200 py-12 lg:py-16">
-                <div className="container mx-auto px-4 max-w-7xl">
+            <div className="relative border-b border-white py-12 lg:py-16 bg-gradient-to-br from-primary-50/50 to-purple-50/50 overflow-hidden">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-primary-300/20 rounded-full blur-[100px] pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-300/20 rounded-full blur-[100px] pointer-events-none"></div>
+                <div className="container mx-auto px-4 max-w-7xl relative z-10 glass rounded-[3rem] p-10 mt-6 shadow-xl shadow-primary-500/5 border-white">
                     <div className="text-center max-w-3xl mx-auto mb-10">
-                        <h1 className="text-4xl md:text-6xl font-black text-secondary-900 tracking-tighter leading-tight mb-4">
+                        <h1 className="text-4xl md:text-6xl font-black text-secondary-900 tracking-tighter leading-tight mb-4 drop-shadow-sm">
                             {params.q ? (
-                                <>Results for <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600">"{params.q}"</span></>
+                                <>Results for <span className="text-gradient">"{params.q}"</span></>
                             ) : params.category ? (
                                 <>{categories.find((c: any) => c.slug === params.category)?.name} <span className="text-primary-500">Deals</span></>
                             ) : params.store ? (
-                                <>{stores.find((s: any) => s.slug === params.store)?.name} <span className="text-indigo-500">Promos</span></>
+                                <>{stores.find((s: any) => s.slug === params.store)?.name} <span className="text-purple-500">Promos</span></>
                             ) : (
-                                <>Find the best <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600">Discounts</span></>
+                                <>Find the best <span className="text-gradient">Discounts</span></>
                             )}
                         </h1>
                         <p className="text-secondary-500 text-lg font-medium">
@@ -154,8 +156,8 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
                                         className={cn(
                                             "px-6 py-3 rounded-full font-bold text-sm transition-all duration-300",
                                             isActive
-                                                ? "bg-secondary-900 text-white shadow-lg shadow-secondary-900/20 scale-105"
-                                                : "bg-secondary-100 text-secondary-600 hover:bg-secondary-200 hover:text-secondary-900"
+                                                ? "bg-gradient-to-r from-primary-600 to-purple-600 text-white shadow-lg shadow-primary-500/30 scale-105"
+                                                : "bg-white/60 text-secondary-600 hover:bg-white hover:text-secondary-900 shadow-sm border border-transparent hover:border-secondary-200"
                                         )}
                                     >
                                         {type.label}
@@ -236,11 +238,11 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
                         </div>
                     ))}
                     {coupons.length === 0 && (
-                        <div className="col-span-full bg-white p-16 rounded-[3rem] text-center border-2 border-dashed border-secondary-200">
+                        <div className="col-span-full glass p-16 rounded-[3rem] text-center border-2 border-dashed border-primary-200 shadow-xl shadow-primary-500/5">
                             <div className="text-6xl mb-6">🕵️‍♂️</div>
                             <h2 className="text-3xl font-black text-secondary-900 mb-4 tracking-tight">No deals found!</h2>
                             <p className="text-secondary-500 font-medium text-lg mb-8 max-w-md mx-auto">We couldn't find any active offers matching your current filters. Try exploring other categories.</p>
-                            <Link href="/" className="inline-flex items-center justify-center bg-secondary-900 hover:bg-primary-600 text-white px-10 py-4 rounded-full font-bold transition-all shadow-xl active:scale-95">
+                            <Link href="/" className="inline-flex items-center justify-center bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-500 hover:to-purple-500 text-white px-10 py-4 rounded-full font-bold transition-all shadow-lg hover:shadow-primary-500/30 active:scale-95">
                                 Clear All Filters
                             </Link>
                         </div>

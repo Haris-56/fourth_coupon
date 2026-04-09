@@ -7,7 +7,9 @@ export async function Footer() {
     const settings = await getSettings();
 
     return (
-        <footer className="bg-white text-secondary-600 py-16 border-t border-secondary-200">
+        <footer className="relative bg-white/70 backdrop-blur-3xl text-secondary-600 py-16 border-t border-white/60 shadow-[0_-10px_40px_rgba(0,0,0,0.03)] overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary-300 to-transparent opacity-50"></div>
+            <div className="absolute -left-40 bottom-0 w-96 h-96 bg-primary-200/30 rounded-full blur-[100px] z-0 pointer-events-none"></div>
             <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-10">
                 {/* Brand */}
                 <div className="space-y-6">

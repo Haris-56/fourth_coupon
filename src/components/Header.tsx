@@ -9,7 +9,7 @@ export async function Header() {
     const session = await verifySession();
 
     return (
-        <header className="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-xl border-b border-primary-100/50 shadow-sm transition-all duration-300">
+        <header className="sticky top-0 z-40 w-full glass border-b-white/50 shadow-sm transition-all duration-300">
             <div className="container mx-auto px-4 h-20 flex items-center justify-between gap-6">
                 {/* Logo */}
                 <Link href="/" className="flex items-center group">
@@ -50,9 +50,11 @@ export async function Header() {
                             <Link href="/login" className="text-secondary-700 hover:text-primary-600 font-bold text-sm transition-colors px-2">
                                 Login
                             </Link>
-                            <Link href="/signup" className="bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-700 hover:to-indigo-700 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-md shadow-primary-500/20 hover:shadow-lg hover:shadow-primary-500/30 hover:-translate-y-0.5">
-                                Sign Up Free
-                            </Link>
+                            <div className="glow-effect">
+                                <Link href="/signup" className="block bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-500 hover:to-purple-500 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-md shadow-primary-500/20 hover:shadow-lg hover:shadow-primary-500/30 hover:-translate-y-0.5">
+                                    Sign Up Free
+                                </Link>
+                            </div>
                         </div>
                     )}
 

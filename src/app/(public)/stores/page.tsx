@@ -36,22 +36,23 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
     });
 
     return (
-        <div className="bg-secondary-50 min-h-screen pb-24 font-sans">
+        <div className="bg-[#fafafa] min-h-screen pb-24 font-sans">
             {/* Split Hero Header */}
-            <div className="bg-white border-b border-secondary-200">
-                <div className="container mx-auto px-4 py-16 lg:py-24 flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div className="relative border-b border-secondary-200 overflow-hidden bg-secondary-950">
+                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-600/30 rounded-full blur-[120px] animate-pulse pointer-events-none"></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-pink-500/20 rounded-full blur-[100px] animate-float pointer-events-none"></div>
+                <div className="container mx-auto px-4 py-16 lg:py-24 flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
                     <div className="flex-1 space-y-6 text-center lg:text-left">
-                        <h1 className="text-5xl md:text-7xl font-black text-secondary-900 tracking-tighter leading-[1.1]">
+                        <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[1.1] drop-shadow-md">
                             The ultimate <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600">brand catalog.</span>
+                            <span className="text-gradient">brand catalog.</span>
                         </h1>
                         <p className="text-xl text-secondary-500 max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
                             Search thousands of top-tier stores and unlock exclusive verified discounts instantly.
                         </p>
                     </div>
 
-                    <div className="flex-1 w-full max-w-xl bg-secondary-900 rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden">
-                        <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-500/20 blur-3xl rounded-full pointer-events-none"></div>
+                    <div className="flex-1 w-full max-w-xl glass-dark rounded-[2.5rem] p-8 relative overflow-hidden">
                         <h3 className="text-white font-bold text-xl mb-6">Find Your Favorite</h3>
                         <form action="/stores" method="GET" className="relative group">
                             {selectedChar && <input type="hidden" name="char" value={selectedChar} />}
@@ -60,11 +61,13 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
                                 type="text"
                                 defaultValue={q}
                                 placeholder="Type a store name..."
-                                className="w-full bg-white/10 text-white placeholder-secondary-400 border border-white/20 rounded-2xl py-4 pl-5 pr-14 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white/20 transition-all font-bold"
+                                className="w-full bg-white/10 text-white placeholder-secondary-400 border border-white/20 rounded-2xl py-4 pl-5 pr-14 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white/20 transition-all font-bold backdrop-blur-sm"
                             />
-                            <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-primary-500 rounded-xl flex items-center justify-center text-white hover:bg-primary-600 transition-colors shadow-lg shadow-primary-500/30">
-                                <Search size={20} strokeWidth={3} />
-                            </button>
+                            <div className="glow-effect absolute right-3 top-1/2 -translate-y-1/2">
+                                <button type="submit" className="w-10 h-10 bg-gradient-to-tr from-primary-500 to-purple-500 rounded-xl flex items-center justify-center text-white hover:scale-105 transition-all">
+                                    <Search size={20} strokeWidth={3} />
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -73,15 +76,15 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
             <div className="container mx-auto px-4 py-12">
                 <div className="flex flex-col lg:flex-row gap-8 items-start">
 
-                    {/* Sticky Sidebar Navigation for A-Z instead of a top row */}
-                    <div className="lg:w-24 w-full flex-shrink-0 lg:sticky lg:top-24 bg-white rounded-[2rem] p-4 shadow-xl shadow-primary-900/5 border border-secondary-100 flex lg:flex-col flex-row flex-wrap justify-center gap-2 z-20">
+                    {/* Sticky Sidebar Navigation for A-Z */}
+                    <div className="lg:w-24 w-full flex-shrink-0 lg:sticky lg:top-28 glass rounded-[2rem] p-4 flex lg:flex-col flex-row flex-wrap justify-center gap-2 z-20">
                         <Link
                             href={`/stores${q ? `?q=${q}` : ''}`}
                             className={cn(
                                 "w-10 h-10 flex items-center justify-center rounded-xl text-xs font-black transition-all",
                                 !selectedChar
-                                    ? "bg-secondary-900 text-white shadow-md scale-105"
-                                    : "bg-transparent text-secondary-400 hover:bg-primary-50 hover:text-primary-600"
+                                    ? "bg-gradient-to-r from-primary-600 to-purple-600 text-white shadow-lg shadow-primary-500/30 scale-105"
+                                    : "bg-white/50 text-secondary-500 hover:bg-white hover:text-primary-600 shadow-sm"
                             )}
                         >
                             ALL
@@ -93,8 +96,8 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
                                 className={cn(
                                     "w-10 h-10 flex items-center justify-center rounded-xl text-xs font-black transition-all",
                                     selectedChar === char
-                                        ? "bg-secondary-900 text-white shadow-md scale-105"
-                                        : "bg-transparent text-secondary-400 hover:bg-primary-50 hover:text-primary-600"
+                                        ? "bg-gradient-to-r from-primary-600 to-purple-600 text-white shadow-lg shadow-primary-500/30 scale-105"
+                                        : "bg-white/50 text-secondary-500 hover:bg-white hover:text-primary-600 shadow-sm"
                                 )}
                             >
                                 {char}
@@ -103,7 +106,7 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
                     </div>
 
                     {/* Main Content Area */}
-                    <div className="flex-1 w-full min-w-0 bg-white rounded-[3rem] p-8 lg:p-14 shadow-xl shadow-primary-900/5 border border-secondary-100/50">
+                    <div className="flex-1 w-full min-w-0 glass rounded-[3rem] p-8 lg:p-14">
 
                         {selectedChar ? (
                             <div className="animate-in slide-in-from-bottom-4 duration-700">
@@ -119,9 +122,9 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
                                         <Link
                                             href={`/store/${store.slug}`}
                                             key={store._id}
-                                            className="group flex items-center gap-4 bg-secondary-50 hover:bg-white border border-secondary-100 hover:border-primary-300 p-3 pr-6 rounded-[2rem] transition-all hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1"
+                                            className="group flex items-center gap-4 bg-white/50 backdrop-blur-md hover:bg-white border-2 border-transparent hover:border-primary-300 p-3 pr-6 rounded-[2rem] transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/10 hover:-translate-y-1"
                                         >
-                                            <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-secondary-100 p-2 group-hover:rotate-6 transition-transform shadow-sm">
+                                            <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-white shadow-md p-2 group-hover:rotate-6 group-hover:scale-110 transition-transform">
                                                 {store.logoUrl ? (
                                                     <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain filter group-hover:brightness-110" />
                                                 ) : (
@@ -151,9 +154,9 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
                                                     <Link
                                                         href={`/store/${store.slug}`}
                                                         key={store._id}
-                                                        className="group flex items-center gap-4 bg-secondary-50 hover:bg-white border border-secondary-100 hover:border-primary-300 p-3 pr-6 rounded-[2rem] transition-all hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1"
+                                                        className="group flex items-center gap-4 bg-white/50 backdrop-blur-md hover:bg-white border-2 border-transparent hover:border-primary-300 p-3 pr-6 rounded-[2rem] transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/10 hover:-translate-y-1"
                                                     >
-                                                        <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-secondary-100 p-2 group-hover:rotate-6 transition-transform shadow-sm">
+                                                        <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-white shadow-md p-2 group-hover:rotate-6 group-hover:scale-110 transition-transform">
                                                             {store.logoUrl ? (
                                                                 <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain filter group-hover:brightness-110" />
                                                             ) : (

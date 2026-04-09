@@ -58,7 +58,9 @@ export default async function StorePage(props: {
         : allCoupons;
 
     return (
-        <div className="bg-secondary-50 min-h-screen pb-16 pt-8">
+        <div className="bg-[#fafafa] relative min-h-screen pb-16 pt-8 overflow-hidden">
+            <div className="absolute top-[0%] right-[0%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[140px] animate-pulse pointer-events-none"></div>
+            <div className="absolute bottom-[20%] left-[-10%] w-[40%] h-[40%] bg-pink-500/10 rounded-full blur-[120px] animate-float pointer-events-none"></div>
             {/* Optimization Hints for Tracking Redirects */}
             {store.affiliateLink && (
                 <>
@@ -69,9 +71,9 @@ export default async function StorePage(props: {
             <div className="container mx-auto px-4">
                 <div className="flex flex-col lg:flex-row gap-8 items-start">
                     {/* Left Sidebar */}
-                    <div className="lg:w-[320px] w-full flex-shrink-0 lg:sticky lg:top-24">
-                        <div className="bg-white rounded-3xl shadow-xl shadow-primary-900/5 border border-secondary-100 p-8 flex flex-col items-center text-center space-y-6 overflow-hidden relative">
-                            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-primary-50 to-white"></div>
+                    <div className="lg:w-[320px] w-full flex-shrink-0 lg:sticky lg:top-28">
+                        <div className="glass rounded-3xl shadow-xl border-white p-8 flex flex-col items-center text-center space-y-6 overflow-hidden relative group">
+                            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-primary-100/50 to-transparent"></div>
 
                             <div className="w-40 h-40 rounded-3xl bg-white shadow-xl shadow-primary-500/10 border border-primary-100 flex items-center justify-center text-5xl font-bold text-secondary-300 overflow-hidden mb-2 p-5 relative z-10 group">
                                 {store.logoUrl ? (
@@ -102,22 +104,24 @@ export default async function StorePage(props: {
                     {/* Right Content */}
                     <div className="flex-1 w-full min-w-0">
                         {/* Store Header with Search */}
-                        <div className="bg-white rounded-3xl shadow-xl shadow-primary-900/5 border border-secondary-100 p-8 mb-8 flex flex-col gap-6 overflow-hidden">
-                            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div className="glass rounded-[2rem] shadow-xl border-white p-8 mb-8 flex flex-col gap-6 relative overflow-hidden">
+                            <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
                                 <div className="min-w-0 flex-1">
-                                    <h2 className="text-3xl font-black text-secondary-900 break-words tracking-tight">{store.name} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600">Promo Codes</span></h2>
-                                    <div className="h-1.5 w-20 bg-gradient-to-r from-primary-500 to-indigo-500 rounded-full mt-3"></div>
+                                    <h2 className="text-3xl font-black text-secondary-900 break-words tracking-tight">{store.name} <span className="text-gradient">Promo Codes</span></h2>
+                                    <div className="h-1.5 w-24 bg-gradient-to-r from-primary-400 to-purple-500 rounded-full mt-3"></div>
                                 </div>
                                 <div className="flex gap-3 shrink-0">
                                     {store.affiliateLink && (
-                                        <a
-                                            href={store.affiliateLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-700 hover:to-indigo-700 text-white px-8 py-3 rounded-xl font-bold text-sm tracking-wide transition-all shadow-md shadow-primary-500/20 hover:shadow-lg hover:-translate-y-0.5"
-                                        >
-                                            Visit Store <ExternalLink size={16} />
-                                        </a>
+                                        <div className="glow-effect">
+                                            <a
+                                                href={store.affiliateLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-500 hover:to-purple-500 text-white px-8 py-3 rounded-xl font-bold text-sm tracking-wide transition-all shadow-md shadow-primary-500/20 hover:shadow-lg hover:-translate-y-0.5"
+                                            >
+                                                Visit Store <ExternalLink size={16} />
+                                            </a>
+                                        </div>
                                     )}
                                 </div>
                             </div>
@@ -130,7 +134,7 @@ export default async function StorePage(props: {
                                         name="q"
                                         defaultValue={q}
                                         placeholder={`Search ${store.name} offers...`}
-                                        className="w-full pl-5 pr-12 py-3.5 bg-secondary-50 border border-secondary-200 rounded-xl text-sm font-bold text-secondary-800 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all shadow-inner"
+                                        className="w-full pl-5 pr-12 py-3.5 bg-white/50 backdrop-blur-md border border-white rounded-xl text-sm font-bold text-secondary-800 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all shadow-inner"
                                     />
                                     <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 text-primary-500 hover:text-primary-600 transition-colors">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 stroke-current" fill="none" viewBox="0 0 24 24" strokeWidth={2.5}>

@@ -158,7 +158,7 @@ export function CouponCard({ coupon, layout = 'vertical' }: CouponCardProps) {
         return (
             <>
                 <Modal />
-                <div className="bg-white border border-secondary-100/50 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 hover:border-primary-200 transition-all duration-300 group flex flex-col md:flex-row items-center p-6 gap-6 relative shadow-sm h-full">
+                <div className="glass rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-primary-500/15 hover:-translate-y-1 hover:border-primary-300/50 transition-all duration-500 group flex flex-col md:flex-row items-center p-6 gap-6 relative h-full">
                     {/* Logo Section */}
                     <div className="w-24 h-24 md:w-32 md:h-32 flex-shrink-0 bg-white rounded-2xl flex items-center justify-center p-4 border border-secondary-100 shadow-sm group-hover:shadow-md transition-shadow">
                         {coupon.imageUrl ? (
@@ -216,9 +216,9 @@ export function CouponCard({ coupon, layout = 'vertical' }: CouponCardProps) {
     return (
         <>
             <Modal />
-            <div className="bg-white rounded-[2.5rem] overflow-hidden hover:-translate-y-2 transition-all duration-500 group h-full flex flex-col relative shadow-xl shadow-primary-900/5 border border-secondary-100/50 hover:shadow-2xl hover:shadow-primary-500/10">
+            <div className="glass rounded-[2.5rem] overflow-hidden hover:-translate-y-2 transition-all duration-500 group h-full flex flex-col relative shadow-xl shadow-primary-900/5 hover:shadow-2xl hover:shadow-primary-500/20">
                 {/* Layered Top Section */}
-                <div className="h-32 bg-gradient-to-br from-secondary-100 via-primary-50 to-indigo-50 relative p-5">
+                <div className="h-32 bg-gradient-to-br from-primary-100/50 via-purple-100/50 to-pink-50/50 relative p-5">
                     {/* Badge at top right */}
                     <div className="absolute top-5 right-5 flex gap-2">
                         {coupon.isVerified && <span className="bg-white/80 backdrop-blur-md text-green-700 text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm">VERIFIED</span>}
@@ -237,7 +237,7 @@ export function CouponCard({ coupon, layout = 'vertical' }: CouponCardProps) {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-8 pt-10 flex-1 flex flex-col bg-white">
+                <div className="p-8 pt-10 flex-1 flex flex-col relative z-20">
                     <div className="flex items-center justify-between mb-3">
                         <Link href={`/store/${coupon.store?.slug}`} className="text-sm text-primary-600 hover:text-secondary-900 font-black tracking-tight uppercase">
                             {coupon.store?.name}
@@ -272,18 +272,20 @@ export function CouponCard({ coupon, layout = 'vertical' }: CouponCardProps) {
                         {coupon.couponType === 'Code' ? (
                             <button
                                 onClick={handleAction}
-                                className="w-full relative group bg-white border-2 border-primary-100 text-primary-600 font-black py-4 rounded-2xl transition-all hover:bg-primary-50 hover:border-primary-500 hover:shadow-xl hover:shadow-primary-500/10 active:scale-95 flex items-center justify-center gap-2"
+                                className="w-full relative group bg-white/50 backdrop-blur-sm border-2 border-primary-200 text-primary-600 font-black py-4 rounded-2xl transition-all hover:bg-white hover:border-primary-400 hover:shadow-xl hover:shadow-primary-500/20 active:scale-95 flex items-center justify-center gap-2"
                             >
                                 <span>Reveal Code</span>
                                 <Scissors size={18} className="rotate-[-45deg]" />
                             </button>
                         ) : (
-                            <button
-                                onClick={handleAction}
-                                className="w-full bg-primary-600 hover:bg-secondary-900 text-white font-black py-4.5 rounded-2xl transition-all shadow-xl shadow-primary-500/10 active:scale-95 text-lg"
-                            >
-                                Open Deal
-                            </button>
+                            <div className="glow-effect">
+                                <button
+                                    onClick={handleAction}
+                                    className="w-full bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-500 hover:to-purple-500 text-white font-black py-4.5 rounded-2xl transition-all shadow-xl shadow-primary-500/20 active:scale-95 text-lg"
+                                >
+                                    Open Deal
+                                </button>
+                            </div>
                         )}
                     </div>
                 </div>
