@@ -116,29 +116,29 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
 
     return (
         <div className="bg-[#fafafa] min-h-screen pb-24 font-sans">
-            {/* Massive Hero-Style Search Header */}
-            <div className="relative border-b border-white py-12 lg:py-16 bg-gradient-to-br from-primary-50/50 to-purple-50/50 overflow-hidden">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-primary-300/20 rounded-full blur-[100px] pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-300/20 rounded-full blur-[100px] pointer-events-none"></div>
-                <div className="container mx-auto px-4 max-w-7xl relative z-10 glass rounded-[3rem] p-10 mt-6 shadow-xl shadow-primary-500/5 border-white">
-                    <div className="text-center max-w-3xl mx-auto mb-10">
-                        <h1 className="text-4xl md:text-6xl font-black text-secondary-900 tracking-tighter leading-tight mb-4 drop-shadow-sm">
+            {/* Neo-Brutalist Search Header */}
+            <div className="relative border-b-8 border-secondary-900 py-12 lg:py-16 bg-primary-400 overflow-hidden">
+                {/* Minimalist Grid Pattern */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#11182722_1px,transparent_1px),linear-gradient(to_bottom,#11182722_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+                <div className="container mx-auto px-4 max-w-7xl relative z-10 bg-white border-4 border-secondary-900 p-10 mt-6 shadow-[12px_12px_0_0_#111827]">
+                    <div className="text-center max-w-3xl mx-auto mb-10 border-b-4 border-dashed border-secondary-200 pb-10">
+                        <h1 className="text-4xl md:text-6xl font-black text-secondary-900 tracking-tighter leading-none mb-6 uppercase">
                             {params.q ? (
-                                <>Results for <span className="text-gradient">"{params.q}"</span></>
+                                <>Results for <span className="text-primary-600 underline decoration-8 underline-offset-4">"{params.q}"</span></>
                             ) : params.category ? (
-                                <>{categories.find((c: any) => c.slug === params.category)?.name} <span className="text-primary-500">Deals</span></>
+                                <>{categories.find((c: any) => c.slug === params.category)?.name} <span className="text-primary-600 underline decoration-8 underline-offset-4">Deals</span></>
                             ) : params.store ? (
-                                <>{stores.find((s: any) => s.slug === params.store)?.name} <span className="text-purple-500">Promos</span></>
+                                <>{stores.find((s: any) => s.slug === params.store)?.name} <span className="text-primary-600 underline decoration-8 underline-offset-4">Promos</span></>
                             ) : (
-                                <>Find the best <span className="text-gradient">Discounts</span></>
+                                <>Find the best <span className="text-primary-600 underline decoration-8 underline-offset-4">Discounts</span></>
                             )}
                         </h1>
-                        <p className="text-secondary-500 text-lg font-medium">
-                            Showing {total} verified coupons and offers available today.
-                        </p>
+                        <div className="inline-block bg-secondary-900 text-white font-black px-6 py-2 uppercase tracking-widest text-sm shadow-[4px_4px_0_0_#9333EA]">
+                            {total} VERIFIED OFFERS
+                        </div>
                     </div>
 
-                    {/* Horizontal Pill Filters */}
+                    {/* Filters container */}
                     <div className="space-y-6">
                         {/* Type Filters */}
                         <div className="flex flex-wrap items-center justify-center gap-3">
@@ -154,10 +154,10 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
                                         key={type.value}
                                         href={buildUrl({ type: type.value, page: '1' })}
                                         className={cn(
-                                            "px-6 py-3 rounded-full font-bold text-sm transition-all duration-300",
+                                            "px-6 py-3 rounded-none font-black text-sm transition-all border-[3px] border-secondary-900 uppercase tracking-widest",
                                             isActive
-                                                ? "bg-gradient-to-r from-primary-600 to-purple-600 text-white shadow-lg shadow-primary-500/30 scale-105"
-                                                : "bg-white/60 text-secondary-600 hover:bg-white hover:text-secondary-900 shadow-sm border border-transparent hover:border-secondary-200"
+                                                ? "bg-primary-500 text-secondary-900 shadow-[4px_4px_0_0_#111827] translate-x-1 -translate-y-1"
+                                                : "bg-[#fafafa] text-secondary-600 hover:bg-secondary-900 hover:text-white"
                                         )}
                                     >
                                         {type.label}
@@ -173,8 +173,8 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
                                 <Link
                                     href={buildUrl({ category: 'all', page: '1' })}
                                     className={cn(
-                                        "shrink-0 px-5 py-2.5 rounded-2xl text-sm font-bold border transition-all snap-start",
-                                        !params.category ? "bg-primary-50 border-primary-200 text-primary-700" : "bg-white border-secondary-200 text-secondary-600 hover:border-primary-300"
+                                        "shrink-0 px-6 py-3 rounded-none text-sm font-black transition-all snap-start border-[3px] border-secondary-900 uppercase tracking-widest",
+                                        !params.category ? "bg-secondary-900 text-white shadow-[4px_4px_0_0_#9333EA] translate-x-1 -translate-y-1" : "bg-[#fafafa] hover:bg-primary-50"
                                     )}
                                 >
                                     All
@@ -184,14 +184,14 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
                                         key={cat._id}
                                         href={buildUrl({ category: cat.slug, page: '1' })}
                                         className={cn(
-                                            "shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-bold border transition-all snap-start",
-                                            params.category === cat.slug ? "bg-primary-50 border-primary-200 text-primary-700" : "bg-white border-secondary-200 text-secondary-600 hover:border-primary-300"
+                                            "shrink-0 flex items-center gap-3 px-6 py-3 rounded-none text-sm font-black transition-all snap-start border-[3px] border-secondary-900 uppercase tracking-widest",
+                                            params.category === cat.slug ? "bg-secondary-900 text-white shadow-[4px_4px_0_0_#9333EA] translate-x-1 -translate-y-1" : "bg-[#fafafa] hover:bg-primary-50"
                                         )}
                                     >
                                         {cat.name}
                                         <span className={cn(
-                                            "text-[10px] px-2 py-0.5 rounded-full",
-                                            params.category === cat.slug ? "bg-primary-200/50 text-primary-800" : "bg-secondary-100 text-secondary-500"
+                                            "text-xs px-2 py-0.5 rounded-none border-2",
+                                            params.category === cat.slug ? "bg-white text-secondary-900 border-white" : "bg-white border-secondary-900 text-secondary-900"
                                         )}>{cat.count}</span>
                                     </Link>
                                 ))}
@@ -205,8 +205,8 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
                                 <Link
                                     href={buildUrl({ store: 'all', page: '1' })}
                                     className={cn(
-                                        "shrink-0 px-5 py-2.5 rounded-2xl text-sm font-bold border transition-all snap-start",
-                                        !params.store ? "bg-indigo-50 border-indigo-200 text-indigo-700" : "bg-white border-secondary-200 text-secondary-600 hover:border-indigo-300"
+                                        "shrink-0 px-6 py-3 rounded-none text-sm font-black transition-all snap-start border-[3px] border-secondary-900 uppercase tracking-widest",
+                                        !params.store ? "bg-pink-400 text-secondary-900 shadow-[4px_4px_0_0_#111827] translate-x-1 -translate-y-1" : "bg-[#fafafa] hover:bg-primary-50"
                                     )}
                                 >
                                     All
@@ -216,8 +216,8 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
                                         key={store._id}
                                         href={buildUrl({ store: store.slug, page: '1' })}
                                         className={cn(
-                                            "shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-bold border transition-all snap-start",
-                                            params.store === store.slug ? "bg-indigo-50 border-indigo-200 text-indigo-700" : "bg-white border-secondary-200 text-secondary-600 hover:border-indigo-300"
+                                            "shrink-0 flex items-center gap-3 px-6 py-3 rounded-none text-sm font-black transition-all snap-start border-[3px] border-secondary-900 uppercase tracking-widest",
+                                            params.store === store.slug ? "bg-pink-400 text-secondary-900 shadow-[4px_4px_0_0_#111827] translate-x-1 -translate-y-1" : "bg-[#fafafa] hover:bg-primary-50"
                                         )}
                                     >
                                         {store.name}
@@ -231,31 +231,30 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
 
             {/* Results Grid - Changed to vertical layout */}
             <div className="container mx-auto px-4 max-w-7xl pt-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {coupons.map((coupon: any) => (
                         <div key={coupon._id} className="h-full">
-                            <CouponCard coupon={coupon} />
+                            <CouponCard coupon={coupon} layout="horizontal" />
                         </div>
                     ))}
                     {coupons.length === 0 && (
-                        <div className="col-span-full glass p-16 rounded-[3rem] text-center border-2 border-dashed border-primary-200 shadow-xl shadow-primary-500/5">
-                            <div className="text-6xl mb-6">🕵️‍♂️</div>
-                            <h2 className="text-3xl font-black text-secondary-900 mb-4 tracking-tight">No deals found!</h2>
-                            <p className="text-secondary-500 font-medium text-lg mb-8 max-w-md mx-auto">We couldn't find any active offers matching your current filters. Try exploring other categories.</p>
-                            <Link href="/" className="inline-flex items-center justify-center bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-500 hover:to-purple-500 text-white px-10 py-4 rounded-full font-bold transition-all shadow-lg hover:shadow-primary-500/30 active:scale-95">
+                        <div className="col-span-full bg-white p-16 border-4 border-secondary-900 text-center shadow-[12px_12px_0_0_#111827]">
+                            <div className="text-8xl mb-6 grayscale">🕵️‍♂️</div>
+                            <h2 className="text-4xl font-black text-secondary-900 mb-6 tracking-tighter uppercase">No deals found!</h2>
+                            <p className="text-secondary-600 font-bold text-lg mb-8 max-w-md mx-auto uppercase tracking-widest border-l-4 border-primary-500 pl-4">We couldn't find any active offers matching your filters.</p>
+                            <Link href="/" className="inline-flex items-center justify-center bg-primary-500 text-secondary-900 border-[3px] border-secondary-900 px-10 py-5 font-black uppercase tracking-widest text-lg transition-all shadow-[6px_6px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none hover:bg-secondary-900 hover:text-white">
                                 Clear All Filters
                             </Link>
                         </div>
                     )}
                 </div>
 
-                {/* Pagination */}
                 {totalPages > 1 && (
-                    <div className="flex justify-center mt-20 gap-3">
+                    <div className="flex justify-center mt-20 gap-4">
                         {page > 1 && (
                             <Link
                                 href={buildUrl({ page: (page - 1).toString() })}
-                                className="w-14 h-14 rounded-full bg-white text-secondary-900 flex items-center justify-center hover:bg-primary-50 hover:text-primary-600 border-2 border-secondary-200 hover:border-primary-200 transition-all font-black text-xl shadow-sm"
+                                className="w-14 h-14 bg-white text-secondary-900 flex items-center justify-center hover:bg-primary-500 border-[3px] border-secondary-900 transition-all font-black text-2xl shadow-[4px_4px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none"
                             >
                                 &larr;
                             </Link>
@@ -272,10 +271,10 @@ export default async function SearchPage(props: { searchParams: Promise<any> }) 
                                     key={p}
                                     href={buildUrl({ page: p.toString() })}
                                     className={cn(
-                                        "w-14 h-14 rounded-full flex items-center justify-center font-black text-lg transition-all duration-300",
+                                        "w-14 h-14 border-[3px] border-secondary-900 flex items-center justify-center font-black text-xl transition-all duration-300 active:translate-x-1 active:translate-y-1 active:shadow-none",
                                         page === p
-                                            ? 'bg-secondary-900 text-white shadow-xl shadow-secondary-900/20 scale-110'
-                                            : 'bg-white text-secondary-500 hover:bg-secondary-100 border-2 border-secondary-200 hover:border-secondary-300 shadow-sm'
+                                            ? 'bg-secondary-900 text-white shadow-[4px_4px_0_0_#9333EA] translate-x-1 -translate-y-1'
+                                            : 'bg-white text-secondary-900 hover:bg-primary-500 shadow-[4px_4px_0_0_#111827]'
                                     )}
                                 >
                                     {p}

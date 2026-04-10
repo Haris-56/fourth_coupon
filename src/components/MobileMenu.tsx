@@ -54,49 +54,49 @@ export function MobileMenu({ isAuth, role }: MobileMenuProps) {
             {/* Sidebar Panel - Portal ensures this is top-level */}
             <div
                 className={cn(
-                    "fixed top-0 left-0 bottom-0 w-[280px] bg-white z-[9999] shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col",
+                    "fixed top-0 left-0 bottom-0 w-[300px] bg-[#fafafa] border-r-4 border-secondary-900 z-[9999] shadow-[12px_0_0_0_#111827] transform transition-transform duration-300 ease-in-out flex flex-col",
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 )}>
                 {/* Header / Logo Section */}
-                <div className="p-6 flex flex-col items-center border-b border-slate-100 relative">
+                <div className="p-6 flex flex-col items-center border-b-4 border-secondary-900 relative bg-primary-400">
                     {/* Close Button */}
                     <button
                         onClick={() => setIsOpen(false)}
-                        className="absolute top-4 right-4 p-1 text-secondary-400 hover:text-secondary-600 rounded-full hover:bg-secondary-100"
+                        className="absolute top-4 right-4 p-2 bg-white text-secondary-900 border-2 border-secondary-900 hover:bg-secondary-900 hover:text-white transition-colors"
                     >
-                        <X size={20} />
+                        <X size={24} strokeWidth={3} />
                     </button>
 
                     {/* Logo */}
-                    <Link href="/" onClick={() => setIsOpen(false)} className="mb-6 mt-4">
-                        <img src="/logo.png" alt="Couponz Factory" className="h-14 w-auto" />
+                    <Link href="/" onClick={() => setIsOpen(false)} className="mb-6 mt-6 p-2 bg-white border-4 border-secondary-900 shadow-[4px_4px_0_0_#111827]">
+                        <img src="/logo.png" alt="Saving Dealz Hub" className="h-10 w-auto filter grayscale" />
                     </Link>
                 </div>
 
                 {/* Profile Section */}
-                <div className="p-6 border-b border-secondary-100">
+                <div className="p-6 border-b-4 border-secondary-900 bg-white">
                     {isAuth ? (
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-full bg-secondary-100 flex items-center justify-center text-secondary-400">
-                                <User size={24} />
+                            <div className="w-12 h-12 bg-secondary-900 flex items-center justify-center text-white border-2 border-secondary-900">
+                                <User size={24} strokeWidth={2.5} />
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="font-bold text-secondary-900 truncate">Admin</p>
+                                <p className="font-black text-secondary-900 truncate uppercase tracking-widest text-sm">Admin</p>
                                 <Link
                                     href="/admin"
                                     onClick={() => setIsOpen(false)}
-                                    className="text-xs text-secondary-500 hover:text-primary-600 transition-colors flex items-center gap-1"
+                                    className="text-xs text-secondary-900 font-bold hover:text-primary-600 transition-colors flex items-center gap-1 uppercase"
                                 >
-                                    View Profile <ChevronRight size={10} />
+                                    View Profile <ChevronRight size={14} strokeWidth={3} />
                                 </Link>
                             </div>
                         </div>
                     ) : (
-                        <div className="flex flex-col gap-3">
-                            <Link href="/login" onClick={() => setIsOpen(false)} className="w-full py-2.5 px-4 bg-secondary-100 text-secondary-700 font-bold rounded-lg text-center hover:bg-secondary-200 transition-colors">
+                        <div className="flex flex-col gap-4">
+                            <Link href="/login" onClick={() => setIsOpen(false)} className="w-full py-3 px-4 bg-[#fafafa] border-[3px] border-secondary-900 text-secondary-900 font-black uppercase tracking-widest text-sm text-center hover:bg-secondary-900 hover:text-white transition-colors shadow-[4px_4px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none">
                                 Log In
                             </Link>
-                            <Link href="/signup" onClick={() => setIsOpen(false)} className="w-full py-2.5 px-4 bg-primary-600 text-white font-bold rounded-lg text-center hover:bg-primary-700 transition-colors shadow-md shadow-primary-200">
+                            <Link href="/signup" onClick={() => setIsOpen(false)} className="w-full py-3 px-4 bg-primary-500 border-[3px] border-secondary-900 text-secondary-900 font-black uppercase tracking-widest text-sm text-center hover:bg-secondary-900 hover:text-white transition-colors shadow-[4px_4px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none">
                                 Sign Up
                             </Link>
                         </div>
@@ -104,28 +104,28 @@ export function MobileMenu({ isAuth, role }: MobileMenuProps) {
                 </div>
 
                 {/* Navigation Links */}
-                <nav className="flex-1 overflow-y-auto py-4 px-6 space-y-2">
+                <nav className="flex-1 overflow-y-auto py-6 px-6 space-y-4 bg-[#fafafa]">
                     {[
-                        { label: 'Search', href: '/search', icon: Search },
-                        { label: 'Categories', href: '/categories', icon: null },
-                        { label: 'Stores', href: '/stores', icon: null },
-                        { label: 'Home', href: '/', icon: null },
+                        { label: 'Search', href: '/search' },
+                        { label: 'Categories', href: '/categories' },
+                        { label: 'Stores', href: '/stores' },
+                        { label: 'Home', href: '/' },
                     ].map((item) => (
                         <Link
                             key={item.href}
                             href={item.href}
                             onClick={() => setIsOpen(false)}
                             className={cn(
-                                "flex items-center gap-3 px-4 py-3 rounded-lg font-bold text-secondary-700 hover:bg-secondary-50 transition-all group",
-                                pathname === item.href && "bg-primary-50 text-primary-600"
+                                "flex items-center gap-4 px-4 py-4 border-[3px] border-secondary-900 font-black uppercase tracking-widest text-sm transition-all group",
+                                pathname === item.href ? "bg-secondary-900 text-white shadow-[4px_4px_0_0_#9333EA] -translate-y-1 translate-x-1" : "bg-white text-secondary-900 hover:bg-primary-500 shadow-[4px_4px_0_0_#111827] hover:-translate-y-1 hover:translate-x-1"
                             )}
                         >
                             <span className={cn(
-                                "w-1.5 h-1.5 rounded-full bg-secondary-300 group-hover:bg-primary-400 transition-colors",
-                                pathname === item.href && "bg-primary-600"
+                                "w-2 h-2 border-2 border-secondary-900 group-hover:bg-primary-900 transition-colors",
+                                pathname === item.href ? "bg-white" : "bg-transparent"
                             )}></span>
 
-                            <span className="text-lg">{item.label}</span>
+                            <span>{item.label}</span>
                         </Link>
                     ))}
 
@@ -135,16 +135,16 @@ export function MobileMenu({ isAuth, role }: MobileMenuProps) {
                                 await logout();
                                 setIsOpen(false);
                             }}
-                            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg font-bold text-red-600 hover:bg-red-50 transition-all group mt-4"
+                            className="w-full flex items-center justify-center gap-3 px-4 py-4 bg-red-500 border-[3px] border-secondary-900 font-black uppercase tracking-widest text-sm text-white hover:bg-secondary-900 transition-all shadow-[4px_4px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none mt-8"
                         >
-                            <LogOut size={18} />
+                            <LogOut size={20} strokeWidth={3} />
                             <span>Log Out</span>
                         </button>
                     )}
                 </nav>
 
                 {/* Footer / Socials */}
-                <div className="p-6 border-t border-slate-100 mt-auto">
+                <div className="p-6 border-t-4 border-secondary-900 bg-white mt-auto">
                     <div className="flex items-center justify-center gap-4">
                         {[
                             { Icon: Facebook, href: '#' },
@@ -155,9 +155,9 @@ export function MobileMenu({ isAuth, role }: MobileMenuProps) {
                             <Link
                                 key={idx}
                                 href={href}
-                                className="w-10 h-10 border border-secondary-200 rounded-lg flex items-center justify-center text-secondary-400 hover:text-primary-600 hover:border-primary-200 hover:bg-primary-50 transition-all"
+                                className="w-12 h-12 bg-[#fafafa] border-[3px] border-secondary-900 flex items-center justify-center text-secondary-900 hover:bg-primary-500 hover:text-secondary-900 transition-all shadow-[4px_4px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none"
                             >
-                                <Icon size={18} />
+                                <Icon size={20} strokeWidth={2.5} />
                             </Link>
                         ))}
                     </div>
@@ -169,10 +169,10 @@ export function MobileMenu({ isAuth, role }: MobileMenuProps) {
     if (!mounted) {
         return (
             <button
-                className="md:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-full transition-colors"
+                className="md:hidden p-3 bg-white border-[3px] border-secondary-900 text-secondary-900 transition-all shadow-[4px_4px_0_0_#111827]"
                 aria-label="Open Menu Placeholder"
             >
-                <Menu size={24} />
+                <Menu size={24} strokeWidth={3} />
             </button>
         );
     }
@@ -181,10 +181,10 @@ export function MobileMenu({ isAuth, role }: MobileMenuProps) {
         <div className="md:hidden">
             <button
                 onClick={() => setIsOpen(true)}
-                className="p-2 text-slate-700 hover:bg-slate-100 rounded-full transition-colors"
+                className="p-3 bg-white border-[3px] border-secondary-900 text-secondary-900 hover:bg-primary-500 transition-all shadow-[4px_4px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none"
                 aria-label="Open Menu"
             >
-                <Menu size={24} />
+                <Menu size={24} strokeWidth={3} />
             </button>
             {createPortal(sidebarContent, document.body)}
         </div>

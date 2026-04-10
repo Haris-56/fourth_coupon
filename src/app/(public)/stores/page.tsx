@@ -37,37 +37,36 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
 
     return (
         <div className="bg-[#fafafa] min-h-screen pb-24 font-sans">
-            {/* Split Hero Header */}
-            <div className="relative border-b border-secondary-200 overflow-hidden bg-secondary-950">
-                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-600/30 rounded-full blur-[120px] animate-pulse pointer-events-none"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-pink-500/20 rounded-full blur-[100px] animate-float pointer-events-none"></div>
-                <div className="container mx-auto px-4 py-16 lg:py-24 flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
-                    <div className="flex-1 space-y-6 text-center lg:text-left">
-                        <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[1.1] drop-shadow-md">
-                            The ultimate <br />
-                            <span className="text-gradient">brand catalog.</span>
+            {/* Neo-Brutalist Hero Header */}
+            <div className="relative border-b-8 border-secondary-900 overflow-hidden bg-primary-400">
+                {/* Minimalist Grid Pattern */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#11182722_1px,transparent_1px),linear-gradient(to_bottom,#11182722_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+                
+                <div className="container mx-auto px-4 py-20 lg:py-32 flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
+                    <div className="flex-1 space-y-8 bg-white border-4 border-secondary-900 p-8 shadow-[8px_8px_0_0_#111827]">
+                        <h1 className="text-5xl md:text-7xl font-black text-secondary-900 tracking-tighter leading-[1.0] uppercase">
+                            Store <br className="hidden md:block"/>Direc<br className="md:hidden"/>
+                            <span className="text-primary-600 underline decoration-8 underline-offset-8">tory.</span>
                         </h1>
-                        <p className="text-xl text-secondary-500 max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
-                            Search thousands of top-tier stores and unlock exclusive verified discounts instantly.
+                        <p className="text-xl text-secondary-600 font-bold border-l-4 border-secondary-900 pl-4 w-fit">
+                            Connecting you with the best brands in the world at Saving Dealz Hub.
                         </p>
                     </div>
 
-                    <div className="flex-1 w-full max-w-xl glass-dark rounded-[2.5rem] p-8 relative overflow-hidden">
-                        <h3 className="text-white font-bold text-xl mb-6">Find Your Favorite</h3>
-                        <form action="/stores" method="GET" className="relative group">
+                    <div className="flex-1 w-full max-w-xl bg-white border-4 border-secondary-900 p-8 shadow-[8px_8px_0_0_#111827] relative">
+                        <h3 className="text-secondary-900 font-black text-2xl mb-6 uppercase tracking-widest">Find Your Favorite</h3>
+                        <form action="/stores" method="GET" className="relative group flex gap-2">
                             {selectedChar && <input type="hidden" name="char" value={selectedChar} />}
                             <input
                                 name="q"
                                 type="text"
                                 defaultValue={q}
-                                placeholder="Type a store name..."
-                                className="w-full bg-white/10 text-white placeholder-secondary-400 border border-white/20 rounded-2xl py-4 pl-5 pr-14 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white/20 transition-all font-bold backdrop-blur-sm"
+                                placeholder="TYPE A STORE NAME..."
+                                className="flex-1 bg-[#fafafa] text-secondary-900 placeholder-secondary-400 border-4 border-secondary-900 rounded-none py-4 px-5 focus:outline-none focus:ring-0 focus:bg-primary-50 transition-all font-black uppercase text-sm tracking-widest"
                             />
-                            <div className="glow-effect absolute right-3 top-1/2 -translate-y-1/2">
-                                <button type="submit" className="w-10 h-10 bg-gradient-to-tr from-primary-500 to-purple-500 rounded-xl flex items-center justify-center text-white hover:scale-105 transition-all">
-                                    <Search size={20} strokeWidth={3} />
-                                </button>
-                            </div>
+                            <button type="submit" className="w-14 h-auto bg-primary-500 border-4 border-secondary-900 flex items-center justify-center text-secondary-900 hover:bg-secondary-900 hover:text-white transition-all shadow-[4px_4px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none">
+                                <Search size={24} strokeWidth={3} />
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -77,14 +76,14 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
                 <div className="flex flex-col lg:flex-row gap-8 items-start">
 
                     {/* Sticky Sidebar Navigation for A-Z */}
-                    <div className="lg:w-24 w-full flex-shrink-0 lg:sticky lg:top-28 glass rounded-[2rem] p-4 flex lg:flex-col flex-row flex-wrap justify-center gap-2 z-20">
+                    <div className="lg:w-24 w-full flex-shrink-0 lg:sticky lg:top-28 bg-white border-4 border-secondary-900 p-4 flex lg:flex-col flex-row flex-wrap justify-center gap-2 z-20 shadow-[8px_8px_0_0_#111827]">
                         <Link
                             href={`/stores${q ? `?q=${q}` : ''}`}
                             className={cn(
-                                "w-10 h-10 flex items-center justify-center rounded-xl text-xs font-black transition-all",
+                                "w-10 h-10 flex items-center justify-center rounded-none text-sm font-black transition-all border-2 border-secondary-900",
                                 !selectedChar
-                                    ? "bg-gradient-to-r from-primary-600 to-purple-600 text-white shadow-lg shadow-primary-500/30 scale-105"
-                                    : "bg-white/50 text-secondary-500 hover:bg-white hover:text-primary-600 shadow-sm"
+                                    ? "bg-primary-500 text-secondary-900 shadow-[4px_4px_0_0_#111827] translate-x-1 -translate-y-1"
+                                    : "bg-[#fafafa] text-secondary-500 hover:bg-secondary-900 hover:text-white"
                             )}
                         >
                             ALL
@@ -94,10 +93,10 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
                                 key={char}
                                 href={`/stores?char=${char}${q ? `&q=${q}` : ''}`}
                                 className={cn(
-                                    "w-10 h-10 flex items-center justify-center rounded-xl text-xs font-black transition-all",
+                                    "w-10 h-10 flex items-center justify-center rounded-none text-sm font-black transition-all border-2 border-secondary-900",
                                     selectedChar === char
-                                        ? "bg-gradient-to-r from-primary-600 to-purple-600 text-white shadow-lg shadow-primary-500/30 scale-105"
-                                        : "bg-white/50 text-secondary-500 hover:bg-white hover:text-primary-600 shadow-sm"
+                                        ? "bg-primary-500 text-secondary-900 shadow-[4px_4px_0_0_#111827] translate-x-1 -translate-y-1"
+                                        : "bg-[#fafafa] text-secondary-500 hover:bg-secondary-900 hover:text-white"
                                 )}
                             >
                                 {char}
@@ -106,7 +105,7 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
                     </div>
 
                     {/* Main Content Area */}
-                    <div className="flex-1 w-full min-w-0 glass rounded-[3rem] p-8 lg:p-14">
+                    <div className="flex-1 w-full min-w-0 bg-white border-4 border-secondary-900 p-8 lg:p-14 shadow-[12px_12px_0_0_#111827]">
 
                         {selectedChar ? (
                             <div className="animate-in slide-in-from-bottom-4 duration-700">
@@ -122,16 +121,16 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
                                         <Link
                                             href={`/store/${store.slug}`}
                                             key={store._id}
-                                            className="group flex items-center gap-4 bg-white/50 backdrop-blur-md hover:bg-white border-2 border-transparent hover:border-primary-300 p-3 pr-6 rounded-[2rem] transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/10 hover:-translate-y-1"
+                                            className="group flex items-center gap-4 bg-[#fafafa] border-[3px] border-secondary-900 hover:bg-primary-50 p-3 pr-6 rounded-none transition-all duration-300 hover:shadow-[6px_6px_0_0_#111827] hover:-translate-y-1 hover:translate-x-1"
                                         >
-                                            <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-white shadow-md p-2 group-hover:rotate-6 group-hover:scale-110 transition-transform">
+                                            <div className="w-14 h-14 bg-white rounded-none flex items-center justify-center overflow-hidden shrink-0 border-2 border-secondary-900 p-2 group-hover:-translate-y-1 transition-transform">
                                                 {store.logoUrl ? (
-                                                    <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain filter group-hover:brightness-110" />
+                                                    <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain filter grayscale group-hover:grayscale-0" />
                                                 ) : (
-                                                    <div className="text-xl font-black text-secondary-300 mix-blend-multiply">{store.name.charAt(0)}</div>
+                                                    <div className="text-2xl font-black text-secondary-900 uppercase tracking-tighter">{store.name.substring(0,2)}</div>
                                                 )}
                                             </div>
-                                            <span className="font-bold text-secondary-900 group-hover:text-primary-600 transition-colors truncate">{store.name}</span>
+                                            <span className="font-black text-secondary-900 uppercase tracking-widest text-sm group-hover:text-primary-600 transition-colors truncate">{store.name}</span>
                                         </Link>
                                     ))}
                                     {filteredStores.length === 0 && <p className="text-secondary-500 font-medium italic col-span-full py-10">No stores found.</p>}
@@ -154,16 +153,16 @@ export default async function StoresPage(props: { searchParams: Promise<{ char?:
                                                     <Link
                                                         href={`/store/${store.slug}`}
                                                         key={store._id}
-                                                        className="group flex items-center gap-4 bg-white/50 backdrop-blur-md hover:bg-white border-2 border-transparent hover:border-primary-300 p-3 pr-6 rounded-[2rem] transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/10 hover:-translate-y-1"
+                                                        className="group flex items-center gap-4 bg-[#fafafa] border-[3px] border-secondary-900 hover:bg-primary-50 p-3 pr-6 rounded-none transition-all duration-300 hover:shadow-[6px_6px_0_0_#111827] hover:-translate-y-1 hover:translate-x-1"
                                                     >
-                                                        <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-white shadow-md p-2 group-hover:rotate-6 group-hover:scale-110 transition-transform">
+                                                        <div className="w-14 h-14 bg-white rounded-none flex items-center justify-center overflow-hidden shrink-0 border-2 border-secondary-900 p-2 group-hover:-translate-y-1 transition-transform">
                                                             {store.logoUrl ? (
-                                                                <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain filter group-hover:brightness-110" />
+                                                                <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain filter grayscale group-hover:grayscale-0" />
                                                             ) : (
-                                                                <div className="text-xl font-black text-secondary-300 mix-blend-multiply">{store.name.charAt(0)}</div>
+                                                                <div className="text-2xl font-black text-secondary-900 uppercase tracking-tighter">{store.name.substring(0,2)}</div>
                                                             )}
                                                         </div>
-                                                        <span className="font-bold text-secondary-900 group-hover:text-primary-600 transition-colors truncate">{store.name}</span>
+                                                        <span className="font-black text-secondary-900 uppercase tracking-widest text-sm group-hover:text-primary-600 transition-colors truncate">{store.name}</span>
                                                     </Link>
                                                 ))}
                                             </div>

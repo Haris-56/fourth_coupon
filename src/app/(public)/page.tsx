@@ -32,51 +32,44 @@ export default async function HomePage() {
     const { featuredCoupons, exclusiveCoupons, popularStores, categories } = await getHomeData();
 
     return (
-        <div className="space-y-16 pb-16">
+        <div className="space-y-24 pb-24 bg-[#fafafa]">
             {/* Hero Section */}
-            <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-40 overflow-hidden">
-                {/* Background decorative elements */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 overflow-hidden pointer-events-none">
-                    <div className="absolute top-[-10%] left-[0%] w-[50vw] h-[50vw] bg-primary-300/40 rounded-full blur-[120px] animate-pulse mix-blend-multiply"></div>
-                    <div className="absolute bottom-[10%] right-[-10%] w-[40vw] h-[40vw] bg-purple-400/30 rounded-full blur-[130px] animate-float mix-blend-multiply" style={{ animationDelay: '2s' }}></div>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,rgba(250,250,250,0.85)_100%)]"></div>
-                    
-                    {/* Animated grid overlay */}
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
-                </div>
+            <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden border-b-8 border-secondary-900 bg-primary-400">
+                {/* Minimalist Grid Overlay */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#11182722_1px,transparent_1px),linear-gradient(to_bottom,#11182722_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
 
-                <div className="container mx-auto px-4 relative z-10 text-center animate-slide-up">
-                    <div className="max-w-4xl mx-auto space-y-12">
-                        <div className="space-y-6">
-                            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] animate-bounce-subtle backdrop-blur-md">
+                <div className="container mx-auto px-4 relative z-10 text-center">
+                    <div className="max-w-5xl mx-auto space-y-12">
+                        <div className="space-y-8 bg-white border-4 border-secondary-900 p-8 md:p-16 shadow-[12px_12px_0_0_#111827]">
+                            <div className="inline-flex items-center gap-2 px-6 py-2 bg-secondary-900 border-2 border-secondary-900">
                                 <span className="relative flex h-3 w-3">
-                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                                  <span className="relative inline-flex rounded-full h-3 w-3 bg-primary-500"></span>
+                                  <span className="animate-ping absolute inline-flex h-full w-full bg-primary-400 opacity-75"></span>
+                                  <span className="relative inline-flex h-3 w-3 bg-primary-500"></span>
                                 </span>
-                                <span className="text-secondary-800 text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase">Verified Deals Added Hourly</span>
+                                <span className="text-white text-xs md:text-sm font-black tracking-widest uppercase">Verified Deals Added Hourly</span>
                             </div>
 
-                            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-secondary-900 tracking-tighter leading-[0.9] drop-shadow-sm">
-                                Unlock the<br />
-                                <span className="text-gradient pb-4 inline-block">Secret Savings.</span>
+                            <h1 className="text-7xl md:text-9xl font-black text-secondary-900 tracking-tighter leading-[0.9] uppercase">
+                                Saving <br className="hidden md:block" />Dealz<br className="md:hidden"/>
+                                <span className="text-primary-600 underline decoration-[12px] underline-offset-8 inline-block pb-4">Hub.</span>
                             </h1>
 
-                            <p className="text-xl md:text-2xl text-secondary-500 font-medium max-w-2xl mx-auto leading-relaxed">
-                                Don't checkout without us. Find the best promo codes for thousands of stores globally.
+                            <p className="text-xl md:text-2xl text-secondary-600 font-bold max-w-2xl mx-auto leading-relaxed border-l-4 border-secondary-900 pl-4">
+                                The ultimate destination for verified discounts. Stop overpaying and start saving today with Saving Dealz Hub.
                             </p>
                         </div>
 
-                        <div className="max-w-3xl mx-auto glow-effect">
+                        <div className="max-w-3xl mx-auto bg-white border-4 border-secondary-900 p-4 shadow-[8px_8px_0_0_#111827]">
                             <SearchForm />
                         </div>
 
-                        <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
-                            <span className="text-xs font-black text-secondary-400 uppercase tracking-[0.3em] mr-2">Trending</span>
+                        <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+                            <span className="bg-secondary-900 text-white font-black px-3 py-1 text-sm tracking-widest uppercase">Trending</span>
                             {categories.slice(0, 5).map((category: any) => (
                                 <Link
                                     key={category._id}
                                     href={`/search?category=${category.slug}`}
-                                    className="bg-white hover:bg-primary-50 text-secondary-800 hover:text-primary-700 px-6 py-2.5 rounded-full text-sm font-bold transition-all border border-secondary-200 hover:border-primary-400 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] hover:shadow-lg hover:-translate-y-1 active:translate-y-0"
+                                    className="bg-white hover:bg-secondary-900 hover:text-white text-secondary-900 border-[3px] border-secondary-900 px-6 py-2.5 text-sm font-black transition-all uppercase tracking-widest shadow-[4px_4px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none"
                                 >
                                     {category.name}
                                 </Link>
@@ -88,24 +81,24 @@ export default async function HomePage() {
 
             {/* Exclusive Coupons - Horizontal Scroll Layout */}
             {exclusiveCoupons.length > 0 && (
-                <section className="py-24 bg-secondary-900 border-y border-secondary-800">
+                <section className="py-24 bg-white border-y-8 border-secondary-900">
                     <div className="container mx-auto px-4 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-                        <div className="text-left">
-                            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4">
-                                Exclusive <span className="text-primary-400">Drops.</span>
+                        <div className="text-left bg-primary-400 border-4 border-secondary-900 p-6 shadow-[8px_8px_0_0_#111827]">
+                            <h2 className="text-5xl md:text-7xl font-black text-secondary-900 tracking-tighter uppercase mb-4 leading-none">
+                                Exclusive <span className="bg-secondary-900 text-white px-2">Drops.</span>
                             </h2>
-                            <p className="text-secondary-400 font-medium text-xl max-w-lg">
-                                VIP access to deals you won't find anywhere else on the web.
+                            <p className="text-secondary-900 font-bold text-xl max-w-lg border-l-4 border-secondary-900 pl-4">
+                                VIP access to deals you won't find anywhere else.
                             </p>
                         </div>
-                        <Link href="/search?filter=exclusive" className="group flex items-center gap-3 text-white bg-white/10 hover:bg-white/20 px-6 py-3 font-bold rounded-full transition-all w-fit">
-                            See All Exclusives <ChevronRight size={18} className="group-hover:translate-x-1" />
+                        <Link href="/search?filter=exclusive" className="group flex items-center justify-center gap-3 text-secondary-900 bg-white border-4 border-secondary-900 px-8 py-4 font-black transition-all hover:bg-secondary-900 hover:text-white shadow-[6px_6px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none uppercase tracking-widest text-lg w-full md:w-auto">
+                            See All Exclusives <ChevronRight size={24} className="group-hover:translate-x-1" />
                         </Link>
                     </div>
 
                     <div className="flex overflow-x-auto pb-12 pt-4 snap-x snap-mandatory hide-scrollbar pl-4 md:pl-[calc((100vw-1536px)/2+2rem)] xl:pl-[calc((100vw-1280px)/2+1rem)] 2xl:pl-[calc((100vw-1536px)/2+1rem)] gap-8" style={{ paddingLeft: 'max(1rem, calc((100vw - 1200px) / 2))' }}>
                         {exclusiveCoupons.map((coupon: any) => (
-                            <div key={coupon._id} className="snap-start shrink-0 w-[90vw] md:w-[700px]">
+                            <div key={coupon._id} className="snap-start shrink-0 w-[90vw] md:w-[700px] h-full">
                                 <CouponCard coupon={coupon} layout="horizontal" />
                             </div>
                         ))}
@@ -115,28 +108,27 @@ export default async function HomePage() {
 
             {/* Featured Deals - Masonry Layout */}
             {featuredCoupons.length > 0 && (
-                <section className="container mx-auto px-4 py-24 relative">
-                    <div className="absolute -left-40 top-40 w-96 h-96 bg-primary-300/20 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
-                    <div className="mb-16 max-w-2xl">
-                        <h2 className="text-5xl md:text-7xl font-black text-secondary-900 tracking-tighter mb-6 leading-none">
-                            Handpicked <br /><span className="text-gradient">For You.</span>
+                <section className="container mx-auto px-4 py-12 relative">
+                    <div className="mb-16 max-w-2xl bg-white border-4 border-secondary-900 p-8 shadow-[8px_8px_0_0_#111827]">
+                        <h2 className="text-6xl md:text-7xl font-black text-secondary-900 tracking-tighter mb-6 leading-none uppercase">
+                            Handpicked <br /><span className="text-primary-600 underline decoration-8">For You.</span>
                         </h2>
-                        <p className="text-xl md:text-2xl text-secondary-500 font-medium pb-2">
-                            The most popular, verified discounts trending right now.
+                        <p className="text-xl md:text-2xl text-secondary-600 font-bold border-l-4 border-secondary-900 pl-4 uppercase tracking-widest text-sm">
+                            The most popular discounts right now.
                         </p>
                     </div>
 
-                    <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {featuredCoupons.map((coupon: any) => (
-                            <div key={coupon._id} className="break-inside-avoid hover:-translate-y-2 transition-transform duration-500">
+                            <div key={coupon._id} className="h-full">
                                 <CouponCard coupon={coupon} />
                             </div>
                         ))}
                     </div>
 
                     <div className="mt-16 text-center">
-                        <Link href="/search?filter=featured" className="inline-flex items-center justify-center gap-2 bg-secondary-900 text-white hover:bg-primary-600 px-12 py-5 font-black uppercase tracking-[0.2em] text-sm transition-all rounded-full shadow-xl hover:shadow-primary-500/30 hover:-translate-y-1">
-                            Load More Deals <ChevronRight size={18} />
+                        <Link href="/search?filter=featured" className="inline-flex items-center justify-center gap-2 bg-primary-500 text-secondary-900 hover:bg-secondary-900 hover:text-white border-[3px] border-secondary-900 px-12 py-5 font-black uppercase tracking-widest text-lg transition-all shadow-[6px_6px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none">
+                            Load More Deals <ChevronRight size={24} strokeWidth={3} />
                         </Link>
                     </div>
                 </section>
@@ -144,33 +136,33 @@ export default async function HomePage() {
 
             {/* Featured Stores - Pill Layout Structure */}
             {popularStores.length > 0 && (
-                <section className="relative py-28 border-t border-secondary-200/50 bg-white/40 backdrop-blur-3xl overflow-hidden">
-                    <div className="absolute bottom-0 right-0 w-[50vw] h-[50vw] bg-pink-300/20 rounded-full blur-[150px] -z-10 pointer-events-none"></div>
+                <section className="relative py-24 border-t-8 border-secondary-900 bg-primary-400 overflow-hidden">
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#11182722_1px,transparent_1px),linear-gradient(to_bottom,#11182722_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
                     <div className="container mx-auto px-4 relative z-10">
-                        <div className="text-center mb-20 max-w-3xl mx-auto">
-                            <h2 className="text-5xl md:text-6xl font-black text-secondary-900 tracking-tight leading-tight mb-6">
+                        <div className="text-center mb-20 max-w-3xl mx-auto bg-white border-4 border-secondary-900 p-8 shadow-[12px_12px_0_0_#111827]">
+                            <h2 className="text-6xl md:text-7xl font-black text-secondary-900 tracking-tighter leading-none mb-6 uppercase">
                                 Top Destinations.
                             </h2>
-                            <p className="text-secondary-500 text-xl font-medium">
-                                We partner with thousands of brands to bring you savings wherever you shop.
+                            <p className="text-secondary-600 text-xl font-bold uppercase tracking-widest border-l-4 border-secondary-900 pl-4 inline-block">
+                                Savings wherever you shop.
                             </p>
                         </div>
 
-                        <div className="flex flex-wrap justify-center gap-5 max-w-6xl mx-auto mb-16 cursor-default">
+                        <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto mb-16 cursor-default">
                             {popularStores.map((store: any) => (
                                 <Link
                                     href={`/store/${store.slug}`}
                                     key={store._id}
-                                    className="group flex items-center gap-4 glass hover:bg-white rounded-full pr-8 pl-2 py-2 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/20 hover:-translate-y-2 border-white/60 hover:border-primary-300"
+                                    className="group flex flex-col items-center bg-[#fafafa] hover:bg-white border-[3px] border-secondary-900 p-6 transition-all duration-300 hover:shadow-[6px_6px_0_0_#111827] hover:-translate-y-2 hover:translate-x-1"
                                 >
-                                    <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-secondary-100 p-2.5 shadow-sm group-hover:scale-110 transition-transform duration-500">
+                                    <div className="w-16 h-16 bg-white flex items-center justify-center overflow-hidden shrink-0 border-[3px] border-secondary-900 p-2 shadow-[2px_2px_0_0_#111827] group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300 mb-4">
                                         {store.logoUrl ? (
-                                            <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain filter group-hover:brightness-110" />
+                                            <img src={store.logoUrl} alt={store.name} className="w-full h-full object-contain filter grayscale group-hover:grayscale-0" />
                                         ) : (
-                                            <span className="font-black text-secondary-400 text-xl mix-blend-multiply">{store.name.substring(0, 1)}</span>
+                                            <span className="font-black text-secondary-900 text-2xl uppercase tracking-tighter">{store.name.substring(0, 2)}</span>
                                         )}
                                     </div>
-                                    <span className="font-black text-secondary-800 text-lg group-hover:text-primary-600 transition-colors">
+                                    <span className="font-black text-secondary-900 text-sm uppercase tracking-widest group-hover:text-primary-600 transition-colors">
                                         {store.name}
                                     </span>
                                 </Link>
@@ -178,8 +170,8 @@ export default async function HomePage() {
                         </div>
 
                         <div className="text-center">
-                            <Link href="/stores" className="inline-flex items-center gap-2 text-primary-600 font-bold hover:text-primary-800 transition-colors">
-                                View A-Z Store Directory <ChevronRight size={20} />
+                            <Link href="/stores" className="inline-flex items-center gap-2 bg-white border-[3px] border-secondary-900 text-secondary-900 font-black hover:bg-secondary-900 hover:text-white transition-all px-8 py-4 shadow-[6px_6px_0_0_#111827] active:translate-x-1 active:translate-y-1 active:shadow-none uppercase tracking-widest">
+                                View A-Z Directory <ChevronRight size={24} strokeWidth={3} />
                             </Link>
                         </div>
                     </div>

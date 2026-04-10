@@ -17,21 +17,19 @@ export default async function CategoriesPage() {
 
     return (
         <div className="bg-[#fafafa] min-h-screen font-sans">
-            {/* Minimalist Split Header */}
-            <div className="bg-secondary-950 overflow-hidden relative rounded-b-[4rem] shadow-2xl">
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary-600/20 to-transparent"></div>
-                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-600/30 rounded-full blur-[120px] animate-pulse"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-pink-500/20 rounded-full blur-[100px] animate-float"></div>
+            {/* Neo-Brutalist Header */}
+            <div className="bg-primary-400 overflow-hidden relative border-b-8 border-secondary-900">
+                {/* Minimalist Grid Pattern */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#11182722_1px,transparent_1px),linear-gradient(to_bottom,#11182722_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
                 
                 <div className="container mx-auto px-4 py-20 lg:py-32 relative z-10 flex flex-col md:flex-row items-end justify-between gap-10">
-                    <div>
-                        <h1 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-6 leading-none drop-shadow-lg">
-                            Discover <br />
-                            <span className="text-gradient">Interests.</span>
+                    <div className="bg-white border-4 border-secondary-900 p-8 shadow-[8px_8px_0_0_#111827]">
+                        <h1 className="text-6xl md:text-8xl font-black text-secondary-900 tracking-tighter mb-6 leading-none uppercase">
+                            Browse <br />
+                            <span className="text-primary-600 underline decoration-8 underline-offset-8">Hub.</span>
                         </h1>
-                        <div className="flex items-center gap-3">
-                            <span className="w-12 h-1 bg-gradient-to-r from-primary-400 to-purple-500 rounded-full"></span>
-                            <p className="text-xl text-secondary-300 font-medium">Over {categories.length} categories to explore</p>
+                        <div className="flex items-center gap-3 bg-secondary-900 text-white px-6 py-2 w-fit">
+                            <span className="text-xl font-bold uppercase tracking-widest">{categories.length} categories</span>
                         </div>
                     </div>
                 </div>
@@ -45,25 +43,21 @@ export default async function CategoriesPage() {
                             <Link
                                 href={`/search?category=${category.slug}`}
                                 key={category._id}
-                                className="glass group relative p-6 rounded-[2rem] overflow-hidden flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-500 hover:border-primary-300/50 hover:shadow-2xl hover:shadow-primary-500/10"
+                                className="bg-white relative p-6 border-4 border-secondary-900 overflow-hidden flex flex-col items-center text-center hover:-translate-y-2 hover:translate-x-1 hover:shadow-[8px_8px_0_0_#9333EA] hover:bg-primary-50 transition-all duration-300"
                             >
-                                {/* Subtle Background Pattern */}
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary-100 rounded-bl-[4rem] opacity-30 group-hover:scale-150 transition-transform duration-700 pointer-events-none"></div>
-
                                 <div className="relative z-10 w-full flex flex-col items-center">
-                                    <div className="w-16 h-16 bg-white/80 backdrop-blur-md shadow-md border border-white flex items-center justify-center rounded-2xl mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                                    <div className="w-20 h-20 bg-[#fafafa] border-4 border-secondary-900 flex items-center justify-center mb-6 shadow-[4px_4px_0_0_#111827] group-hover:-translate-y-2 transition-transform duration-300">
                                         {category.imageUrl && !category.imageUrl.startsWith('http') ? (
-                                            <i className={`text-2xl text-primary-500 ${category.imageUrl}`}></i>
+                                            <i className={`text-4xl text-secondary-900 ${category.imageUrl}`}></i>
                                         ) : category.imageUrl ? (
-                                            <img src={category.imageUrl} alt={category.name} className="w-8 h-8 object-contain" />
+                                            <img src={category.imageUrl} alt={category.name} className="w-10 h-10 object-contain grayscale" />
                                         ) : (
-                                            <span className="text-xl font-black text-secondary-300">{category.name.charAt(0)}</span>
+                                            <span className="text-2xl font-black text-secondary-900">{category.name.substring(0, 2).toUpperCase()}</span>
                                         )}
                                     </div>
-                                    <h2 className="font-black text-secondary-900 group-hover:text-primary-600 transition-colors text-lg leading-tight">
+                                    <h2 className="font-black text-secondary-900 group-hover:text-primary-600 transition-colors text-2xl uppercase tracking-tighter leading-none border-b-4 border-transparent group-hover:border-primary-600">
                                         {category.name}
                                     </h2>
-                                    <div className="mt-2 h-1 w-0 group-hover:w-16 bg-gradient-to-r from-primary-400 to-purple-500 rounded-full transition-all duration-500"></div>
                                 </div>
                             </Link>
                         );
